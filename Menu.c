@@ -18,17 +18,28 @@ void redimensiona(int w, int h) {
     glLoadIdentity();
 }
 
-void desenha(void){
+void desenha(double x,double y, double x2, double y2){
 
-    glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(1,1,1);
+    glColor3f(0,1,0);
     glBegin(GL_TRIANGLE_STRIP);
-    glVertex3f(10,10,0);
-    glVertex3f(10,20,0);
-    glVertex3f(20,20,0);
-
+   //          x  y  z
+    glVertex3f(x+10,y+10,0);
+    glVertex3f(x2+40,y+10,0);
+    glVertex3f(x2+40,y2+30,0);
+    glVertex3f(x+10,y2+30,0);
+    glVertex3f(x+10,y+10,0);
     glEnd();
     glFlush();
+}
+
+void Botoes (void){
+    glClear(GL_COLOR_BUFFER_BIT);
+    //     x x2 y y2
+    desenha(0,0,0,0);
+    desenha(0,0,60,60);
+    //desenha(0,100);
+    //desenha(0,150);
+
 }
 
 void teclado (unsigned char key, int x, int y){
@@ -59,12 +70,12 @@ int main(int argc, char **argv)
 
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
     glutInitWindowSize(400, 400);
-    glutInitWindowPosition(100,100);
+    glutInitWindowPosition(200,200);
 
     glutCreateWindow("Menu");
 
     inicializa();
-    glutDisplayFunc(desenha);
+    glutDisplayFunc(Botoes);
     glutReshapeFunc(redimensiona);
     glutKeyboardFunc(teclado);
     glutMainLoop();
