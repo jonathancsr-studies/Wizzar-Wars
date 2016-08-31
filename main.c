@@ -6,9 +6,7 @@
 #include <time.h>
 #include "keyboard.h"
 #include "draw.h"
-#include "menu.h"
-
-double global_py,global_uy;
+//#include "menu.h"
 
 //Estrutura que tem as variaveis do projetil
 struct projetil{
@@ -18,6 +16,8 @@ struct projetil{
 void desenhaCena(){
 
   desenhaCenaInicialJogo();
+  desenhaPersonagem(1);
+  desenhaPersonagem(0);
 }
 
 void inicializa(void)
@@ -31,7 +31,7 @@ void redimensionada(int width, int height)
 
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
-   glOrtho(0.0, 768.0, 0.0, 1280.0, -1.0, 1.0);
+   glOrtho(0.0, 900.0, 0.0, 1440.0, -1.0, 1.0);
 
    glMatrixMode(GL_MODELVIEW);
    glLoadIdentity();
@@ -43,11 +43,11 @@ int main(int argc, char **argv) {
       glutInitContextVersion(1,1);
       glutInitContextProfile(GLUT_COMPATIBILITY_PROFILE);
       glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
-      glutInitWindowSize(1280,768);
+      glutInitWindowSize(1440,900);
       glutInitWindowPosition(0,0);
 
       glutCreateWindow("Nome_do_Jogo");
-      glutDisplayFunc(desenhaMenu);
+      glutDisplayFunc(desenhaCena);
       glutReshapeFunc(redimensionada);
       glutKeyboardFunc(teclaPresionada);
 

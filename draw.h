@@ -1,3 +1,4 @@
+double global_py,global_uy;
 void desenhaCenaInicialJogo(){
   int i,x,y;
 double cont=0;
@@ -6,10 +7,10 @@ srand(time(0));
   glColor3f(0.5,1,1);
 
   for(i=0;i<8;i++){
-      y=200+rand()%900;
+      y=200+rand()%800;
 
       if(i==0||i==7){
-        y+=200;
+        y+=100;
         if(i==0)
           global_py=y;
           else{
@@ -41,24 +42,29 @@ void desenhaPersonagem(int personagem){
 
       int i;
       double altura;
-      glClear(GL_COLOR_BUFFER_BIT);
+      double x0,x1;
+      //glClear(GL_COLOR_BUFFER_BIT);
       glColor3f(0,0,0);
 
       if(personagem==1){
         altura=global_uy;
+        x0=830;
+        x1=890;
       }else{
         altura=global_py;
+        x0=10;
+        x1=70;
       }
 
       for(i=0;i<4;i++){
 
         glBegin(GL_TRIANGLE_STRIP);
 
-        glVertex2f(10,altura);
-        glVertex2f(30,altura);
-        glVertex2f(30,altura+40);
-        glVertex2f(10,altura+40);
-        glVertex2f(10,altura);
+        glVertex2f(x0,altura);
+        glVertex2f(x1,altura);
+        glVertex2f(x1,altura+150);
+        glVertex2f(x0,altura+150);
+        glVertex2f(x0,altura);
 
         glEnd();
       }
