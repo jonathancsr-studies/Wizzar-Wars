@@ -7,6 +7,9 @@
 #include "keyboard.h"
 #include "draw.h"
 #include "menu.h"
+
+double global_py,global_uy;
+
 //Estrutura que tem as variaveis do projetil
 struct projetil{
   double x;
