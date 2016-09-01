@@ -15,7 +15,10 @@ void teclaPresionada(unsigned char key, int x, int y){
       break;
     case 'a':
 //glutDisplayFunc(movimentoPersonagem);
-      movimentoPersonagem();
+      movimentoPersonagemEsquerda(0);
+      break;
+    case:
+      movimentoPersonagemDireita(0);
       break;
     case 70:
       glutFullScreen();
