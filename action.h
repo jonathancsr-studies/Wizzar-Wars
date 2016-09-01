@@ -1,21 +1,17 @@
-double pos=0;
-void movimentoPersonagem(){
-      int i;
+void movimentoPersonagem(int a){
 
       glPushMatrix();                 // Importante!!
 
-      glTranslatef(10+pos,global_py, 0);
-            pos+=5;
-            glBegin(GL_TRIANGLE_FAN);
-
-              glVertex2f(0,0);
-              glVertex2f(60,0);
-              glVertex2f(60,150);
-              glVertex2f(0,150);
-
-            glEnd();
-
+      glTranslatef(5, 0);
+      if(i==1){
+      desenhaPersonagem(1);
+      }else{
+            desenhaPersonagem(0);
+      }
       glPopMatrix();                  // Importante!!
 
 
 }
+
+//http://www.inf.pucrs.br/~pinho/CG/Aulas/OpenGL/TransformacoesGL.html
+
