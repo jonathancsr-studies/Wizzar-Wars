@@ -9,6 +9,11 @@ void teclaPresionada(unsigned char key, int x, int y){
     case 82:
       //reiniciaJogo();
       break;
+
+    case 'a':
+    //glutDisplayFunc(movimentoPersonagem);
+    movimentoPersonagem();
+    break;
 // ESC
     case 27:
       exit(0);

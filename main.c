@@ -7,7 +7,7 @@
 #include "keyboard.h"
 #include "draw.h"
 //#include "menu.h"
-
+#include "action.h"
 //Estrutura que tem as variaveis do projetil
 struct projetil{
   double x;
@@ -18,6 +18,7 @@ void desenhaCena(){
   desenhaCenaInicialJogo();
   desenhaPersonagem(1);
   desenhaPersonagem(0);
+
 }
 
 void inicializa(void)

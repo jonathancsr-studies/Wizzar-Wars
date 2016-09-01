@@ -10,7 +10,7 @@ srand(time(0));
       y=200+rand()%800;
 
       if(i==0||i==7){
-        y+=100;
+        y+=200;
         if(i==0)
           global_py=y;
           else{
