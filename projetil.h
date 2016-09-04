@@ -1,0 +1,2 @@
+void movimento();
+void desenhaProjetil();
