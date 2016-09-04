@@ -10,11 +10,31 @@ void criarRetangulo(double largura, double altura){
 }
 
 void desenhaCenaInicialJogo(PREDIOS predio[]){
- int i,x,y;
+ int i,x;
 
 
-  glColor3f(0.512,0,0.512);
+
 for (i = 0; i < NUMPREDIOS; i++) {
+      x=rand()%6;
+            if(x==0){
+                  glColor3f(0.512,0,0.512);
+            }
+            if(x==1){
+                   glColor3f(0.5,0.5,0.5);
+            }
+            if(x==2){
+                   glColor3f(0.5,0,0.9);
+            }
+            if(x==3){
+                   glColor3f(0,1,0.);
+            }
+            if(x==4){
+                   glColor3f(0,0,1);
+            }
+            if(x==5){
+                   glColor3f(1,0,0);
+            }
+
       glBegin(GL_TRIANGLE_FAN);
      //          x  y  z
             glVertex3f(0+predio[i].cont,0,0);

@@ -32,7 +32,7 @@ void desenhaCena(){
   desenhaCenaInicialJogo(mapa);
   movimentoPersonagem(p1.posicao[0],p1.posicao[1]);
   movimentoPersonagem(p2.posicao[0],p2.posicao[1]);
-  desenhaProjetil();
+  desenhaProjetil(p1.posicao[0]+90,p1.posicao[1]+90);
 }
 
 void teclaPresionada(unsigned char key, int x, int y){
@@ -68,7 +68,7 @@ void teclaPresionada(unsigned char key, int x, int y){
       glutPostRedisplay();
       break;
      case' ':
-      //glutTimerFunc(0,movimento,0);
+      glutTimerFunc(0,movimento,0);
      break;
       case 70:
      glutFullScreen();
