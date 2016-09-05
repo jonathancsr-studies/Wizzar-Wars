@@ -1,3 +1,5 @@
+#ifndef ESCREVERTEXTO_H
+#define ESCREVERTEXTO_H
 
 // Função que recebe a fonte e um texto por parâmetro para ser exibido na
 // tela usando caracteres bitmap
@@ -44,3 +46,6 @@ void Desenha(void)
 	// Exibe o desenha na janela
 	glutSwapBuffers();
 }
+
+
+#endif

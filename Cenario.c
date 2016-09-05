@@ -16,10 +16,10 @@ void desenhaCenaInicialJogo(PREDIOS predio[]){
 
 for (i = 0; i < NUMPREDIOS; i++) {
       x=rand()%6;
-            if(x==0){
+            //if(x==0){
                   glColor3f(0.512,0,0.512);
-            }
-            if(x==1){
+          //  }
+          /* if(x==1){
                    glColor3f(0.5,0.5,0.5);
             }
             if(x==2){
@@ -33,7 +33,7 @@ for (i = 0; i < NUMPREDIOS; i++) {
             }
             if(x==5){
                    glColor3f(1,0,0);
-            }
+            }*/
 
       glBegin(GL_TRIANGLE_FAN);
      //          x  y  z
@@ -45,9 +45,6 @@ for (i = 0; i < NUMPREDIOS; i++) {
       glEnd();
 
       }
-
-    glFlush();
-
 }
 void gerarMapa(PREDIOS* predio) {
 
@@ -83,8 +80,4 @@ void planodeFundo(){
   glClear(GL_COLOR_BUFFER_BIT);
       glColor3f(0,0,0.3);
       criarRetangulo(LARGURA,ALTURA);
-      glFlush();
-
-
-
 }

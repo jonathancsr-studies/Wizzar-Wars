@@ -1,12 +1,16 @@
 #include "include.h"
+
 PREDIOS mapa[NUMPREDIOS];
 
-PERSONAGEM p1,p2;
+extern int ativo;
 
-
+extern PERSONAGEM p1,p2;
 
 void inicializa(void)
 {
+    ativo = 1;
+    gerarMapa(mapa);
+    inicializa_personagem();
     glClearColor(1, 1, 1, 0);
     glutPostRedisplay();
 }
@@ -24,18 +28,23 @@ void redimensionada(int width, int height)
    glLoadIdentity();
 }
 
-
-
+extern double angulo=30;
+extern double movimento_x=0,movimento_y=0;
 void desenhaCena(){
 
   planodeFundo();
   desenhaCenaInicialJogo(mapa);
   movimentoPersonagem(p1.posicao[0],p1.posicao[1]);
   movimentoPersonagem(p2.posicao[0],p2.posicao[1]);
-  desenhaProjetil(p1.posicao[0]+90,p1.posicao[1]+90);
+  if(ativo){
+        desenhaProjetil(p1.posicao[0]+(LARGURAPERSONAGEM+10),p1.posicao[1]+(LARGURAPERSONAGEM+10));
+  }
+  else
+        desenhaProjetil(p2.posicao[0]-(LARGURAPERSONAGEM+10),p2.posicao[1]+(LARGURAPERSONAGEM+10));
+  glutSwapBuffers();
 }
 
-void teclaPresionada(unsigned char key, int x, int y){
+void teclasPressionada(unsigned char key, int x, int y){
   switch (key) {
     case 80:
       //pause();
@@ -46,58 +55,65 @@ void teclaPresionada(unsigned char key, int x, int y){
     case 27:
       exit(0);
       break;
-    case 'd':
-      if(p1.posicao[0]<LARGURA/NUMPREDIOS-60)
-            p1.posicao[0]+=TRANSLADA;
-      glutPostRedisplay();
-      break;
-    case 'a':
-      if(p1.posicao[0]>0)
-            p1.posicao[0]-=TRANSLADA;
-      glutPostRedisplay();
-      break;
     case 'j':
-      if(p2.posicao[0]>(LARGURA - (LARGURA/NUMPREDIOS)))
-            p2.posicao[0]-=TRANSLADA;
-      glutPostRedisplay();
-      break;
-
-    case 'l':
-      if(p2.posicao[0]<LARGURA-60)
-            p2.posicao[0]+=TRANSLADA;
-      glutPostRedisplay();
+        if(ativo)
+            ativo=0;
+        else
+            ativo=1;
       break;
      case' ':
-      glutTimerFunc(0,movimento,0);
-     break;
+        lancaProjetil();
+        glutTimerFunc(0,movimento,0);
+        break;
       case 70:
      glutFullScreen();
      default:
      break;
-
   }
+  glutPostRedisplay();
+}
 
+void setasPressionadas(unsigned char key, int x, int y){
+  switch (key) {
+    case GLUT_KEY_RIGHT:
+        if(ativo){
+            if(p1.posicao[0]<(LARGURA/NUMPREDIOS)-LARGURAPERSONAGEM)
+                p1.posicao[0]+=TRANSLADA;
+        }
+        else
+            if(p2.posicao[0]<LARGURA-LARGURAPERSONAGEM)
+                p2.posicao[0]+=TRANSLADA;
+      break;
+    case GLUT_KEY_LEFT:
+        if(ativo){
+            if(p1.posicao[0]>0)
+                p1.posicao[0]-=TRANSLADA;
+        }
+        else
+            if(p2.posicao[0]>(LARGURA - (LARGURA/NUMPREDIOS)))
+                p2.posicao[0]-=TRANSLADA;
+
+      break;
+     default:
+        break;
+  }
+  glutPostRedisplay();
 }
 
 int main(int argc, char **argv) {
-
-      gerarMapa(mapa);
-      p1.posicao[0]=10;
-      p2.posicao[0]=830;
-      p1.posicao[1]=mapa[0].y;
-      p2.posicao[1]=mapa[NUMPREDIOS-1].y;
       glutInit(&argc, argv);
 
       glutInitContextVersion(1,1);
       glutInitContextProfile(GLUT_COMPATIBILITY_PROFILE);
-      glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
+      glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
       glutInitWindowSize(ALTURA,LARGURA);
       glutInitWindowPosition(0,0);
-      glutCreateWindow("Piroca");
+      glutCreateWindow("JOGO");
 
       glutDisplayFunc(desenhaCena);
       glutReshapeFunc(redimensionada);
-      glutKeyboardFunc(teclaPresionada);
+      glutKeyboardFunc(teclasPressionada);
+      glutSpecialFunc(setasPressionadas);
 //      glutMouseFunc(mouse);
 
       inicializa();
