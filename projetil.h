@@ -16,4 +16,5 @@ void movimentoProjetil();
 void criaProjetil();
 void lancaProjetil();
 void inicializa_Projetil();
+void geraTrajetoria();
 #endif

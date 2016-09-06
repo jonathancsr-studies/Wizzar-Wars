@@ -52,38 +52,38 @@ void teclasPressionada(unsigned char key, int x, int y){
       exit(0);
       break;
     case 'j':
-        if(ativo){
-            ativo=0;
-      }else{
-            ativo=1;
-      }
-      criaProjetil();
+//if(ativo){
+   //         ativo=0;
+ //     }else{
+    //        ativo=1;
+  //    }
+     // 
       break;
-     case 'p':
-     case 'P':
+     case 'C':
+     case 'c':
+     //geraTrajetoria();
       break;
      case 'e':
      case 'E':
-     if(timer){
-         timer=0;
-  }else{
-         timer=1;
-  }
      break;
      case' ':
+     if(timer==0){
      timer=1;
         lancaProjetil();
         glutTimerFunc(0,movimentoProjetil,0);
+    }
         break;
       case 70:
      glutFullScreen();
      default:
      break;
   }
+  criaProjetil();
   glutPostRedisplay();
 }
 
 void setasPressionadas(unsigned char key, int x, int y){
+  if(timer==0){
   switch (key) {
     case GLUT_KEY_RIGHT:
         if(ativo){
@@ -110,10 +110,10 @@ void setasPressionadas(unsigned char key, int x, int y){
   inicializa_Projetil();
   glutPostRedisplay();
 }
+}
 
 int main(int argc, char **argv) {
       glutInit(&argc, argv);
-
       glutInitContextVersion(1,1);
       glutInitContextProfile(GLUT_COMPATIBILITY_PROFILE);
       glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);

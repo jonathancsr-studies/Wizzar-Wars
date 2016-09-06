@@ -24,5 +24,5 @@
 #define PI 3.14
 #define ALTURAPROJETIL 20
 #define LARGURAPROJETIL 10
-#define ANGULO 45
+#define ANGULO 60
 #endif

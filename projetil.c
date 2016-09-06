@@ -53,9 +53,11 @@ int i;
                            A1.posicao.y=A1.posicao_inicial.y;
                            timer=0;
                            if(ativo){
-                           ativo=0;
+                                ativo=0;
+                           }else{
+                                ativo=1;
                            }
-                           ativo=1;
+
                      }
                }
          }else{
@@ -65,13 +67,55 @@ int i;
                            A2.posicao.y=A2.posicao_inicial.y;
                            timer=0;
                            if(ativo){
-                           ativo=0;
+                                ativo=0;
+                           }else{
+                                ativo=1;
                            }
-                           ativo=1;
+
                      }
                }
          }
    }
+
+   //SE ACERTAR O INIMIGO
+   if(ativo){
+   		if(A1.posicao.x >= p2.posicao[0] && A1.posicao.x <= p2.posicao[0]+LARGURAPERSONAGEM){
+   			if(A1.posicao.y <= p2.posicao[1]+ALTURAPERSONAGEM){
+                           A1.posicao.x=A1.posicao_inicial.x;
+                           A1.posicao.y=A1.posicao_inicial.y;
+                           p2.vida--;
+                           timer=0;
+                           printf("ACERTEI NO SEGUNDO");
+                           if(ativo){
+                                ativo=0;
+                           }else{
+                                ativo=1;
+                           }
+                           
+   			}
+   		}
+   	}else{
+   		if(A2.posicao.x >= p1.posicao[0] && A2.posicao.x <= p1.posicao[0]+LARGURAPERSONAGEM){
+   			if(A2.posicao.y <= p1.posicao[1]+ALTURAPERSONAGEM){
+                           A2.posicao.x=A2.posicao_inicial.x;
+                           A2.posicao.y=A2.posicao_inicial.y;
+                           timer=0;
+                           p1.vida--;
+                           printf("ACERTEI NO PRIMEIRO");
+                           if(ativo){
+                                ativo=0;
+                           }else{
+                                ativo=1;
+                           }
+   			}
+   		}
+   	}
+
+   	if(p1.vida==0||p2.vida==0){
+
+
+   	}
+
       glutPostRedisplay();
       if(timer)
       glutTimerFunc(60,movimentoProjetil,0);
@@ -107,4 +151,35 @@ void inicializa_Projetil(){
             A2.velocidade.y=0;
             A2.posicao_inicial.x=A2.posicao.x;
             A2.posicao_inicial.y=A2.posicao.y;
+}
+void geraTrajetoria(){
+
+	int i;
+   double x,y,velocidade_x,velocidade_y;
+  if(ativo){
+          y=A1.posicao.x;
+          x=A1.posicao.y;
+          velocidade_x=A1.velocidade.x;
+          velocidade_y=A1.velocidade.y;
+    }else{
+          x=A2.posicao.x;
+          y=A2.posicao.y;
+          velocidade_x=A2.velocidade.x;
+          velocidade_y=A2.velocidade.y;
+   }
+
+   glColor3f(0,1,0);
+   glBegin(GL_LINE_STRIP);
+
+   for(i=0;i<300;i++){
+
+   	glVertex3f(x,y,0);
+   	x+=velocidade_x;
+   	y+=velocidade_y;
+   	y-=GRAVIDADE;
+   }
+   glEnd();
+
+   glFlush();
+
 }
