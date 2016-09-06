@@ -1,3 +1,0 @@
-gcc main.c personagem.c Cenario.c projetil.c -o execut.exe -lGL -lglut -lGLEW -lm
-
-
