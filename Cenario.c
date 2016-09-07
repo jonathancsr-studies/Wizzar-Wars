@@ -1,5 +1,4 @@
 #include "include.h"
-double angulo;
 double velocidade;
 int timer;
 int pause;

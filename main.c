@@ -1,7 +1,6 @@
 #include "include.h"
 
 PREDIOS mapa[NUMPREDIOS];
-extern double angulo=45;
 extern double velocidade=300;
 extern int ativo;
 extern PROJETIL A1,A2;
@@ -45,6 +44,7 @@ void desenhaCena(){
   criaAstro();
   telaPause();
   geraTrajetoria();
+  geraAngulo();
   glutSwapBuffers();
 }
 

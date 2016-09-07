@@ -6,7 +6,6 @@ int timer;
 int pot;
 int cheat;
 int pause;
-double angulo;
 void teclasPressionada(unsigned char key, int x, int y){
   switch (key) {
     case 82:
@@ -42,7 +41,7 @@ void teclasPressionada(unsigned char key, int x, int y){
         break;
       case 70:
      glutFullScreen();
-     case '1':
+     /*case '1':
      if(pot==1){
            angulo+=1;
      }else{
@@ -103,19 +102,18 @@ void teclasPressionada(unsigned char key, int x, int y){
            angulo+=8;
      }else{
            if(pot==0)
-           angulo+=80;
+
      }
      break;
      case '9':
      if(pot==1){
-           angulo+=9;
+
      }else{
            if(pot==0)
-           angulo+=90;
+
      }
-     break;
+     break;*/
      case '0':
-           angulo+=0;
      break;
      case 13:
      pot=0;
@@ -148,10 +146,25 @@ if(pause)
             if(p2.posicao[0]>(LARGURA - (LARGURA/NUMPREDIOS)))
                 p2.posicao[0]-=TRANSLADA;
       break;
+      case GLUT_KEY_UP:
+      if(ativo){
+             A1.direcao++;
+
+      }
+      else
+             A2.direcao++;
+      break;
+      case GLUT_KEY_DOWN:
+      if(ativo){
+             A1.direcao--;
+      }
+      else
+             A2.direcao--;
+      break;
      default:
         break;
   }
-  inicializa_Projetil();
+  //inicializa_Projetil();
   glutPostRedisplay();
  }
 }

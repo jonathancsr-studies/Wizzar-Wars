@@ -10,6 +10,7 @@ typedef struct Projetil{
       VETOR posicao;
       VETOR velocidade;
       VETOR posicao_inicial;
+      int direcao;
 }PROJETIL;
 
 void movimentoProjetil();

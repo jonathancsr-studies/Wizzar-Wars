@@ -1,6 +1,5 @@
 #include "include.h"
 int ativo;
-double angulo;
 double velocidade;
 PERSONAGEM p1,p2;
 PROJETIL A1,A2;
@@ -10,11 +9,11 @@ int cheat;
 PREDIOS mapa[NUMPREDIOS];
 void lancaProjetil(){
       if(ativo){
-          A1.velocidade.x=cos(PI*angulo/180)*(velocidade/50);
-          A1.velocidade.y=sin(PI*angulo/180)*(velocidade/50);
+          A1.velocidade.x=cos(PI*A1.direcao/180)*(velocidade/50);
+          A1.velocidade.y=sin(PI*A1.direcao/180)*(velocidade/50);
     }else{
-          A2.velocidade.x=(cos(PI*angulo/180)*(velocidade/50))*(-1);
-          A2.velocidade.y=sin(PI*angulo/180)*(velocidade/50);
+          A2.velocidade.x=(cos(PI*A2.direcao/180)*(velocidade/50))*(-1);
+          A2.velocidade.y=sin(PI*A2.direcao/180)*(velocidade/50);
    }
 
 }
@@ -129,6 +128,7 @@ void inicializa_Projetil(){
             A1.posicao.y=p1.posicao[1]+(ALTURAPERSONAGEM);
             A1.velocidade.x=0;
             A1.velocidade.y=0;
+            A1.direcao=0;
             A1.posicao_inicial.x=A1.posicao.x;
             A1.posicao_inicial.y=A1.posicao.y;
             //Projetil o personagem 2
@@ -136,6 +136,7 @@ void inicializa_Projetil(){
             A2.posicao.y=p2.posicao[1]+(ALTURAPERSONAGEM);
             A2.velocidade.x=0;
             A2.velocidade.y=0;
+            A2.direcao=0;
             A2.posicao_inicial.x=A2.posicao.x;
             A2.posicao_inicial.y=A2.posicao.y;
 }
@@ -147,13 +148,13 @@ if(cheat){
             if(ativo){
                 x=A1.posicao.x+LARGURAPROJETIL;
                 y=A1.posicao.y;
-                velocidade_x=cos(PI*angulo/180)*(velocidade/50);
-                velocidade_y=sin(PI*angulo/180)*(velocidade/50);;
+                velocidade_x=cos(PI*A1.direcao/180)*(velocidade/50);
+                velocidade_y=sin(PI*A1.direcao/180)*(velocidade/50);
           }else{
                 x=A2.posicao.x;
                 y=A2.posicao.y;
-                velocidade_x=(cos(PI*angulo/180)*(velocidade/50))*(-1);
-                velocidade_y=sin(PI*angulo/180)*(velocidade/50);;
+                velocidade_x=(cos(PI*A2.direcao/180)*(velocidade/50))*(-1);
+                velocidade_y=sin(PI*A2.direcao/180)*(velocidade/50);
                }
 
          glColor3f(1,0,0);
@@ -205,4 +206,36 @@ if(cheat){
                   }
          }
 
+}
+
+
+void geraAngulo(){
+      int i;
+      double x,y,velocidade_x,velocidade_y;
+      if(timer==0){
+      if(ativo){
+          x=A1.posicao.x+LARGURAPROJETIL;
+          y=A1.posicao.y;
+          velocidade_x=cos(PI*A1.direcao/180)*(velocidade/50);
+          velocidade_y=sin(PI*A1.direcao/180)*(velocidade/50);
+   }else{
+          x=A2.posicao.x;
+          y=A2.posicao.y;
+          velocidade_x=(cos(PI*A2.direcao/180)*(velocidade/50))*(-1);
+          velocidade_y=sin(PI*A2.direcao/180)*(velocidade/50);
+         }
+
+      glColor3f(1,0,0);
+
+      glBegin(GL_LINE_STRIP);
+
+      for(i=0;i<40;i++)
+      {
+      glVertex3f(x,y,0);
+      x+=velocidade_x;
+      y+=velocidade_y;
+      velocidade_y-=GRAVIDADE;
+      }
+      glEnd();
+}
 }
