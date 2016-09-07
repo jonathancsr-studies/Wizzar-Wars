@@ -23,5 +23,7 @@
 #define PI 3.14
 #define ALTURAPROJETIL 20
 #define LARGURAPROJETIL 10
+#define ALTURASOL 75
+#define LARGURASOL 30
 
 #endif

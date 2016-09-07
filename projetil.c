@@ -6,6 +6,8 @@ PERSONAGEM p1,p2;
 PROJETIL A1,A2;
 int ativo;
 int timer;
+int cheat;
+PREDIOS mapa[NUMPREDIOS];
 void lancaProjetil(){
       if(ativo){
           A1.velocidade.x=cos(PI*angulo/180)*(velocidade/50);
@@ -16,7 +18,6 @@ void lancaProjetil(){
    }
 
 }
-PREDIOS mapa[NUMPREDIOS];
 void movimentoProjetil(){
 
 int i;
@@ -31,6 +32,7 @@ int i;
           A2.velocidade.y-=GRAVIDADE;
    }
    //SE SAIR DA TELA
+
    if(A1.posicao.x >= LARGURA||A2.posicao.x+LARGURAPROJETIL <= 0)
          {
                A1.posicao.x=A1.posicao_inicial.x;
@@ -44,7 +46,6 @@ int i;
                ativo=1;
             }
          }
-
 // SE ACERTAR UM DOS PREDIOS
  for(i=0;i<NUMPREDIOS;i++){
              if(ativo){
@@ -53,11 +54,7 @@ int i;
                            A1.posicao.x=A1.posicao_inicial.x;
                            A1.posicao.y=A1.posicao_inicial.y;
                            timer=0;
-                           if(ativo){
-                                ativo=0;
-                           }else{
-                                ativo=1;
-                           }
+                           ativo=0;
 
                      }
                }
@@ -67,17 +64,11 @@ int i;
                            A2.posicao.x=A2.posicao_inicial.x;
                            A2.posicao.y=A2.posicao_inicial.y;
                            timer=0;
-                           if(ativo){
-                                ativo=0;
-                           }else{
-                                ativo=1;
-                           }
-
+                           ativo=1;
                      }
                }
          }
    }
-
    //SE ACERTAR O INIMIGO
    if(ativo){
    		if(A1.posicao.x >= p2.posicao[0] && A1.posicao.x <= p2.posicao[0]+LARGURAPERSONAGEM){
@@ -111,14 +102,11 @@ int i;
    			}
    		}
    	}
-
+      cheat=0;
    	if(p1.vida==0||p2.vida==0){
 
 
    	}
-      glutPostRedisplay();
-      if(timer)
-      glutTimerFunc(25,movimentoProjetil,0);
 }
 
 void criaProjetil(){
@@ -137,47 +125,84 @@ void criaProjetil(){
 void inicializa_Projetil(){
 
             //Projetil do personagem 1
-            A1.posicao.x=p1.posicao[0]+(LARGURAPERSONAGEM+10);
-            A1.posicao.y=p1.posicao[1]+(LARGURAPERSONAGEM+10);
+            A1.posicao.x=p1.posicao[0]+(LARGURAPERSONAGEM);
+            A1.posicao.y=p1.posicao[1]+(ALTURAPERSONAGEM);
             A1.velocidade.x=0;
             A1.velocidade.y=0;
             A1.posicao_inicial.x=A1.posicao.x;
             A1.posicao_inicial.y=A1.posicao.y;
             //Projetil o personagem 2
-            A2.posicao.x=p2.posicao[0]-(20);
-            A2.posicao.y=p2.posicao[1]+(LARGURAPERSONAGEM+10);
+            A2.posicao.x=p2.posicao[0]-LARGURAPROJETIL;
+            A2.posicao.y=p2.posicao[1]+(ALTURAPERSONAGEM);
             A2.velocidade.x=0;
             A2.velocidade.y=0;
             A2.posicao_inicial.x=A2.posicao.x;
             A2.posicao_inicial.y=A2.posicao.y;
 }
 void geraTrajetoria(){
-
-	int i;
+	int i,j,v=0;
    double x,y,velocidade_x,velocidade_y;
-  if(ativo){
-          y=A1.posicao.x;
-          x=A1.posicao.y;
-          velocidade_x=A1.velocidade.x;
-          velocidade_y=A1.velocidade.y;
-    }else{
-          x=A2.posicao.x;
-          y=A2.posicao.y;
-          velocidade_x=A2.velocidade.x;
-          velocidade_y=A2.velocidade.y;
-   }
+if(cheat){
+      if(timer==0){
+            if(ativo){
+                x=A1.posicao.x+LARGURAPROJETIL;
+                y=A1.posicao.y;
+                velocidade_x=cos(PI*angulo/180)*(velocidade/50);
+                velocidade_y=sin(PI*angulo/180)*(velocidade/50);;
+          }else{
+                x=A2.posicao.x;
+                y=A2.posicao.y;
+                velocidade_x=(cos(PI*angulo/180)*(velocidade/50))*(-1);
+                velocidade_y=sin(PI*angulo/180)*(velocidade/50);;
+               }
 
-   glColor3f(0,1,0);
-   glBegin(GL_LINE_STRIP);
+         glColor3f(1,0,0);
+         glBegin(GL_LINES);
 
-   for(i=0;i<300;i++){
+         for(j=0;j<LARGURA;j++){
 
-   	glVertex3f(x,y,0);
-   	x+=velocidade_x;
-   	y+=velocidade_y;
-   	y-=GRAVIDADE;
-   }
+
+               	glVertex3f(x,y,0);
+               	x+=velocidade_x;
+               	y+=velocidade_y;
+               	velocidade_y-=GRAVIDADE;
+                  if(v){
+                        break;
+                  }
+                  if(x >= LARGURA || x+LARGURAPROJETIL <= 0)
+                       {
+                              v=1;
+                       }
+               // SE ACERTAR UM DOS PREDIOS
+                for(i=0;i<NUMPREDIOS;i++){
+                            if(ativo){
+                              if(((x+LARGURAPROJETIL > mapa[i].cont) || (x > mapa[i].cont))  && ((x < mapa[i].cont+(LARGURA/NUMPREDIOS)) || (x+LARGURAPROJETIL < mapa[i].cont+(LARGURA/NUMPREDIOS)))){
+                                    if(y < mapa[i].y)
+                                    v=1;
+                              }
+                        }else{
+                              if(((x > mapa[i].cont) || (x+LARGURAPROJETIL > mapa[i].cont)) && ((x < mapa[i].cont+(LARGURA/NUMPREDIOS)) || (x+LARGURAPROJETIL < mapa[i].cont+(LARGURA/NUMPREDIOS)))){
+                                    if(y < mapa[i].y)
+                                    v=1;
+                              }
+                        }
+                  }
+                  //SE ACERTAR O INIMIGO
+                  if(ativo){
+                  		if(x > p2.posicao[0] && x < p2.posicao[0]+LARGURAPERSONAGEM){
+                  			if(y < p2.posicao[1]+ALTURAPERSONAGEM)
+                                          v=1;
+                  		}
+                  	}else{
+                  		if(x > p1.posicao[0] && x < p1.posicao[0]+LARGURAPERSONAGEM){
+                  			if(y < p1.posicao[1]+ALTURAPERSONAGEM)
+                                          v=1;
+                  		}
+                  	}
+
+                  }
    glEnd();
-
+                  }
+         }
 
 }

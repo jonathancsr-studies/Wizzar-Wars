@@ -1,8 +1,9 @@
 #include "include.h"
 double angulo;
 double velocidade;
-
-
+int timer;
+int pause;
+ASTRO Sol;
 void criarRetangulo(double largura, double altura){
   glBegin(GL_TRIANGLE_FAN);
     glVertex3f(0,0,0);
@@ -36,10 +37,10 @@ void gerarMapa(PREDIOS* predio) {
       double global_py=0,global_uy=0;
       for(i=0;i<NUMPREDIOS;i++){
 
-          y=500+rand()%400;
+          y=300+rand()%500;
           predio[i].y=y;
           if(i==0||i==NUMPREDIOS-1){
-            y=300+rand()%600;
+            y=400+rand()%300;
             predio[i].y=y;
             if(i==0){
               global_py=y;
@@ -63,11 +64,56 @@ void planodeFundo(){
       criarRetangulo(LARGURA,ALTURA);
 }
 
+void Timer(){
+
+
+
+}
+
 void JogoRoda(){
 
-      printf("\tDIGITE ANGULO\n");
-      scanf("%lf",&angulo);
-      printf("\tDIGITE VELOCIDADE\n");
-      scanf("%lf",&velocidade);
+if(pause){
+      if(timer)
+      movimentoProjetil();
+}
+      movimentoAstro();
+      glutPostRedisplay();
+      glutTimerFunc(60,JogoRoda,0);
+
+}
+
+void telaPause(){
+
+      if(pause==0){
+      glColor3f(0,1,0);
+      criarRetangulo(LARGURA,ALTURA);
+
+      }
+
+}
+
+void iniciaAstro(){
+
+      Sol.posicao.x=LARGURA/16;
+      Sol.posicao.y=((ALTURA/9)*7)-ALTURASOL;
+      Sol.velocidade.x=0.106;
+      Sol.velocidade.y=0.15;
+      //Sol.velocidade.x=(7*LARGURA)/(4000);
+      //Sol.velocidade.y=(2*ALTURA)/(4000);
+}
+
+void criaAstro(){
+
+      glPushMatrix();
+      glTranslatef(Sol.posicao.x,Sol.posicao.y,0);
+      criarRetangulo(LARGURASOL,ALTURASOL);
+      glPopMatrix();
+}
+
+void movimentoAstro(){
+
+      Sol.posicao.x+=Sol.velocidade.x;
+      Sol.posicao.y+=Sol.velocidade.y;
+      Sol.velocidade.y-=0.00006;
 
 }

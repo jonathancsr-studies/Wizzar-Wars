@@ -4,6 +4,8 @@ PERSONAGEM p1,p2;
 int ativo;
 int timer;
 int pot;
+int cheat;
+int pause;
 double angulo;
 void teclasPressionada(unsigned char key, int x, int y){
   switch (key) {
@@ -15,22 +17,28 @@ void teclasPressionada(unsigned char key, int x, int y){
       break;
      case 'C':
      case 'c':
-     JogoRoda();
-      break;
-     case 'e':
-     case 'E':
-     if(timer){
-           timer=0;
+     if(timer==0){
+     if(cheat){
+           cheat=0;
      }else{
-           timer=1;
+           cheat=1;
+      }
      }
+      break;
+     case 'p':
+     case 'P':
+     if(pause){
+           pause=0;
+     }else{
+           pause=1;
+     }
+     telaPause();
      break;
      case' ':
      if(timer==0){
-     timer=1;
-    }
      lancaProjetil();
-  glutTimerFunc(0,movimentoProjetil,0);
+     timer=1;
+      }
         break;
       case 70:
      glutFullScreen();
@@ -115,11 +123,11 @@ void teclasPressionada(unsigned char key, int x, int y){
      default:
      break;
   }
-  criaProjetil();
   glutPostRedisplay();
 }
 
 void setasPressionadas(unsigned char key, int x, int y){
+if(pause)
   if(timer==0){
   switch (key) {
     case GLUT_KEY_RIGHT:
