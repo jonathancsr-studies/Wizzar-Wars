@@ -1,4 +1,7 @@
 #include "include.h"
+double angulo;
+double velocidade;
+
 
 void criarRetangulo(double largura, double altura){
   glBegin(GL_TRIANGLE_FAN);
@@ -12,25 +15,7 @@ void criarRetangulo(double largura, double altura){
 void desenhaCenaInicialJogo(PREDIOS predio[]){
  int i;
 for (i = 0; i < NUMPREDIOS; i++) {
-      //x=rand()%6;
-            //if(x==0){
-                  glColor3f(0.512,0,0.512);
-          //  }
-          /* if(x==1){
-                   glColor3f(0.5,0.5,0.5);
-            }
-            if(x==2){
-                   glColor3f(0.5,0,0.9);
-            }
-            if(x==3){
-                   glColor3f(0,1,0.);
-            }
-            if(x==4){
-                   glColor3f(0,0,1);
-            }
-            if(x==5){
-                   glColor3f(1,0,0);
-            }*/
+                  glColor3f(1,0.5,0.6);
 
       glBegin(GL_TRIANGLE_FAN);
      //          x  y  z
@@ -53,7 +38,6 @@ void gerarMapa(PREDIOS* predio) {
 
           y=500+rand()%400;
           predio[i].y=y;
-          printf("%d \talt %d\n",i,predio[i].cont );
           if(i==0||i==NUMPREDIOS-1){
             y=300+rand()%600;
             predio[i].y=y;
@@ -77,4 +61,13 @@ void planodeFundo(){
   glClear(GL_COLOR_BUFFER_BIT);
       glColor3f(0,0,0.3);
       criarRetangulo(LARGURA,ALTURA);
+}
+
+void JogoRoda(){
+
+      printf("\tDIGITE ANGULO\n");
+      scanf("%lf",&angulo);
+      printf("\tDIGITE VELOCIDADE\n");
+      scanf("%lf",&velocidade);
+
 }

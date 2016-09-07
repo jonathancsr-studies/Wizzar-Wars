@@ -12,17 +12,16 @@
 #include "predios.h"
 #include "personagem.h"
 #include "cenario.h"
-
+#include "keyboard.h"
 
 #define TRANSLADA 1
 #define LARGURA 720
 #define ALTURA 1280
 #define GRAVIDADE 0.1
-#define VELOCIDADE 400
 #define LARGURAPERSONAGEM 30
 #define ALTURAPERSONAGEM 75
 #define PI 3.14
 #define ALTURAPROJETIL 20
 #define LARGURAPROJETIL 10
-#define ANGULO 60
+
 #endif

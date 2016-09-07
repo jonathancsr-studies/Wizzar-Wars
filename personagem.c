@@ -5,7 +5,7 @@ extern PREDIOS mapa[NUMPREDIOS];
 
 
 void desenhaPersonagem(){
-      glColor3f(1,0,1);
+      glColor3f(1,1,0);
       criarRetangulo(LARGURAPERSONAGEM,ALTURAPERSONAGEM);
 }
 void movimentoPersonagem(float x,float y){
