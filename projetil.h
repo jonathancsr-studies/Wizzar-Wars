@@ -18,4 +18,5 @@ void criaProjetil();
 void lancaProjetil();
 void inicializa_Projetil();
 void geraTrajetoria();
+void geraAngulo();
 #endif

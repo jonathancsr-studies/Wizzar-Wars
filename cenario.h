@@ -17,4 +17,5 @@ void telaPause();
 void criaAstro();
 void iniciaAstro();
 void movimentoAstro();
+void barraForca();
 #endif // CENARIO_H

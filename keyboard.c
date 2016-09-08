@@ -41,82 +41,6 @@ void teclasPressionada(unsigned char key, int x, int y){
         break;
       case 70:
      glutFullScreen();
-     /*case '1':
-     if(pot==1){
-           angulo+=1;
-     }else{
-           if(pot==0)
-           angulo+=10;
-     }
-     break;
-     case '2':
-     if(pot==1){
-          angulo+=2;
-     }else{
-           if(pot==0)
-          angulo+=20;
-     }
-     break;
-     case '3':
-     if(pot==1){
-           if(pot==0)
-          angulo+=3;
-     }else{
-          angulo+=30;
-     }
-     break;
-     case '4':
-     if(pot==1){
-           if(pot==0)
-           angulo+=4;
-     }else{
-           angulo+=40;
-     }
-     break;
-     case '5':
-     if(pot==1){
-           angulo+=5;
-     }else{
-           if(pot==0)
-           angulo+=50;
-     }
-     break;
-     case '6':
-     if(pot==1){
-           angulo+=6;
-     }else{
-           if(pot==0)
-           angulo+=60;
-     }
-     break;
-     case '7':
-     if(pot==1){
-           angulo+=7;
-     }else{
-           if(pot==0)
-           angulo+=70;
-     }
-     break;
-     case '8':
-     if(pot==1){
-           angulo+=8;
-     }else{
-           if(pot==0)
-
-     }
-     break;
-     case '9':
-     if(pot==1){
-
-     }else{
-           if(pot==0)
-
-     }
-     break;*/
-     case '0':
-     break;
-     case 13:
-     pot=0;
      break;
      default:
      break;
@@ -132,39 +56,47 @@ if(pause)
         if(ativo){
             if(p1.posicao[0]<(LARGURA/NUMPREDIOS)-LARGURAPERSONAGEM)
                 p1.posicao[0]+=TRANSLADA;
+                A1.posicao.x+=TRANSLADA;
         }
         else
-            if(p2.posicao[0]<LARGURA-LARGURAPERSONAGEM)
+            if(p2.posicao[0]<LARGURA-LARGURAPERSONAGEM){
                 p2.posicao[0]+=TRANSLADA;
+                A2.posicao.x+=TRANSLADA;
+            }
       break;
     case GLUT_KEY_LEFT:
         if(ativo){
             if(p1.posicao[0]>0)
                 p1.posicao[0]-=TRANSLADA;
+                A1.posicao.x-=TRANSLADA;
         }
         else
-            if(p2.posicao[0]>(LARGURA - (LARGURA/NUMPREDIOS)))
+            if(p2.posicao[0]>(LARGURA - (LARGURA/NUMPREDIOS))){
                 p2.posicao[0]-=TRANSLADA;
+                A2.posicao.x-=TRANSLADA;
+            }
       break;
       case GLUT_KEY_UP:
       if(ativo){
+            if(A1.direcao < 90)
              A1.direcao++;
-
       }
       else
+            if(A1.direcao < 90)
              A2.direcao++;
       break;
       case GLUT_KEY_DOWN:
       if(ativo){
+          if(A1.direcao > 0)
              A1.direcao--;
       }
       else
+      if(A1.direcao > 0)
              A2.direcao--;
       break;
      default:
         break;
   }
-  //inicializa_Projetil();
   glutPostRedisplay();
  }
 }

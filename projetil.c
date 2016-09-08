@@ -3,6 +3,7 @@ int ativo;
 double velocidade;
 PERSONAGEM p1,p2;
 PROJETIL A1,A2;
+double gravidade;
 int ativo;
 int timer;
 int cheat;
@@ -24,11 +25,11 @@ int i;
       if(ativo){
           A1.posicao.x+=A1.velocidade.x;
           A1.posicao.y+=A1.velocidade.y;
-          A1.velocidade.y-=GRAVIDADE;
+          A1.velocidade.y-=gravidade;
     }else{
           A2.posicao.x+=A2.velocidade.x;
           A2.posicao.y+=A2.velocidade.y;
-          A2.velocidade.y-=GRAVIDADE;
+          A2.velocidade.y-=gravidade;
    }
    //SE SAIR DA TELA
 
@@ -166,7 +167,7 @@ if(cheat){
                	glVertex3f(x,y,0);
                	x+=velocidade_x;
                	y+=velocidade_y;
-               	velocidade_y-=GRAVIDADE;
+               	velocidade_y-=gravidade;
                   if(v){
                         break;
                   }
@@ -178,12 +179,12 @@ if(cheat){
                 for(i=0;i<NUMPREDIOS;i++){
                             if(ativo){
                               if(((x+LARGURAPROJETIL > mapa[i].cont) || (x > mapa[i].cont))  && ((x < mapa[i].cont+(LARGURA/NUMPREDIOS)) || (x+LARGURAPROJETIL < mapa[i].cont+(LARGURA/NUMPREDIOS)))){
-                                    if(y < mapa[i].y)
+                                    if(y <= mapa[i].y)
                                     v=1;
                               }
                         }else{
                               if(((x > mapa[i].cont) || (x+LARGURAPROJETIL > mapa[i].cont)) && ((x < mapa[i].cont+(LARGURA/NUMPREDIOS)) || (x+LARGURAPROJETIL < mapa[i].cont+(LARGURA/NUMPREDIOS)))){
-                                    if(y < mapa[i].y)
+                                    if(y <= mapa[i].y)
                                     v=1;
                               }
                         }
@@ -229,12 +230,12 @@ void geraAngulo(){
 
       glBegin(GL_LINE_STRIP);
 
-      for(i=0;i<40;i++)
+      for(i=0;i<10;i++)
       {
       glVertex3f(x,y,0);
       x+=velocidade_x;
       y+=velocidade_y;
-      velocidade_y-=GRAVIDADE;
+      velocidade_y-=gravidade;
       }
       glEnd();
 }

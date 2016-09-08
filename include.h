@@ -17,7 +17,6 @@
 #define TRANSLADA 1
 #define LARGURA 720
 #define ALTURA 1280
-#define GRAVIDADE 0.1
 #define LARGURAPERSONAGEM 30
 #define ALTURAPERSONAGEM 75
 #define PI 3.14

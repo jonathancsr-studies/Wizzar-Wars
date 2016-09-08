@@ -1,15 +1,18 @@
 #include "include.h"
 
 PREDIOS mapa[NUMPREDIOS];
-extern double velocidade=300;
+extern double velocidade = 0;
 extern int ativo;
 extern PROJETIL A1,A2;
 extern PERSONAGEM p1,p2;
 extern int timer;
+extern double gravidade= 0.1;
 extern int pot;
 extern int pause=1;
 extern ASTRO Sol;
 extern int cheat=0;
+extern int new_w=0;
+extern int new_h=0;
 void inicializa(void)
 {
     ativo = 1;
@@ -21,9 +24,22 @@ void inicializa(void)
     glutPostRedisplay();
 }
 
-void redimensionada(int width, int height)
+void redimensionada(int w, int h)
 {
-   glViewport(0, 0, width, height);
+      double area=w/h;
+
+      if(area > 16/9)
+      {
+      new_w=(h/16)*16;
+      new_h=(h/16)*9;
+
+      }else{
+
+      new_w=(w/16)*16;
+      new_h=(w/16)*9;
+
+      }
+   glViewport((w-new_w)/2,(h-new_h)/2,new_w,new_h);
 
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
@@ -35,7 +51,6 @@ void redimensionada(int width, int height)
 }
 
 void desenhaCena(){
-
   planodeFundo();
   desenhaCenaInicialJogo(mapa);
   movimentoPersonagem(p1.posicao[0],p1.posicao[1]);
@@ -44,12 +59,14 @@ void desenhaCena(){
   criaAstro();
   telaPause();
   geraTrajetoria();
+  barraForca();
   geraAngulo();
   glutSwapBuffers();
 }
 
 int main(int argc, char **argv) {
-            glutInit(&argc, argv);
+
+      glutInit(&argc, argv);
       glutInitContextVersion(1,1);
       glutInitContextProfile(GLUT_COMPATIBILITY_PROFILE);
       glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);

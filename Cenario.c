@@ -2,6 +2,8 @@
 double velocidade;
 int timer;
 int pause;
+int ativo;
+double gravidade;
 ASTRO Sol;
 void criarRetangulo(double largura, double altura){
   glBegin(GL_TRIANGLE_FAN);
@@ -34,6 +36,7 @@ void gerarMapa(PREDIOS* predio) {
       int i;
       int cont=0,y;
       double global_py=0,global_uy=0;
+
       for(i=0;i<NUMPREDIOS;i++){
 
           y=300+rand()%500;
@@ -74,10 +77,11 @@ void JogoRoda(){
 if(pause){
       if(timer)
       movimentoProjetil();
+      barraForca();
 }
       movimentoAstro();
       glutPostRedisplay();
-      glutTimerFunc(60,JogoRoda,0);
+      glutTimerFunc(20,JogoRoda,0);
 
 }
 
@@ -111,8 +115,37 @@ void criaAstro(){
 
 void movimentoAstro(){
 
-      Sol.posicao.x+=Sol.velocidade.x;
-      Sol.posicao.y+=Sol.velocidade.y;
-      Sol.velocidade.y-=0.00006;
+      Sol.posicao.x+=Sol.velocidade.x/3;
+      Sol.posicao.y+=Sol.velocidade.y/3;
+      Sol.velocidade.y-=0.00006/3;
+}
 
+void barraForca(){
+
+    int cont=0,i,x=0,y;
+    glTranslatef(LARGURA/2-50,25,0);
+    glPushMatrix();
+        glBegin(GL_TRIANGLE_FAN);
+            glVertex3f(0,0,0);
+            glVertex3f(x,0,0);
+            glVertex3f(x,20,0);
+            glVertex3f(0,20,0);
+        glEnd();
+    glPopMatrix();
+
+    if(cont == 0)
+    {
+        x+=3;
+        velocidade+=5;
+        if(x>=100)
+            cont=1;
+    }else if(cont == 1)
+    {
+        x-=3;
+        velocidade-=5;
+        if(x<=0)
+        {
+            cont = 0;
+        }
+    }
 }
