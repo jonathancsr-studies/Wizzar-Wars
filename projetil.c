@@ -12,11 +12,11 @@ int forca;
 PREDIOS mapa[NUMPREDIOS];
 void lancaProjetil(){
       if(ativo){
-          A1.velocidade.x=cos(PI*A1.direcao/180)*(velocidade/4);
-          A1.velocidade.y=sin(PI*A1.direcao/180)*(velocidade/4);
+          A1.velocidade.x=cos(PI*A1.direcao/180)*(velocidade/5);
+          A1.velocidade.y=sin(PI*A1.direcao/180)*(velocidade/5);
     }else{
-          A2.velocidade.x=(cos(PI*A2.direcao/180)*(velocidade/4))*(-1);
-          A2.velocidade.y=sin(PI*A2.direcao/180)*(velocidade/4);
+          A2.velocidade.x=(cos(PI*A2.direcao/180)*(velocidade/5))*(-1);
+          A2.velocidade.y=sin(PI*A2.direcao/180)*(velocidade/5);
    }
 
 }
@@ -157,13 +157,13 @@ if(cheat){
             if(ativo){
                 x=A1.posicao.x+LARGURAPROJETIL;
                 y=A1.posicao.y;
-                velocidade_x=cos(PI*A1.direcao/180)*(velocidade/4);
-                velocidade_y=sin(PI*A1.direcao/180)*(velocidade/4);
+                velocidade_x=cos(PI*A1.direcao/180)*(velocidade/5);
+                velocidade_y=sin(PI*A1.direcao/180)*(velocidade/5);
           }else{
                 x=A2.posicao.x;
                 y=A2.posicao.y;
-                velocidade_x=(cos(PI*A2.direcao/180)*(velocidade/4))*(-1);
-                velocidade_y=sin(PI*A2.direcao/180)*(velocidade/4);
+                velocidade_x=(cos(PI*A2.direcao/180)*(velocidade/5))*(-1);
+                velocidade_y=sin(PI*A2.direcao/180)*(velocidade/5);
                }
 
          glColor3f(1,0,0);

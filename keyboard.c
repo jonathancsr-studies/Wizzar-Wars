@@ -32,9 +32,10 @@ void teclasPressionada(unsigned char key, int x, int y){
      }else{
            pause=1;
      }
-     telaPause();
+     //telaPause();
      break;
      case' ':
+    if(forca==0)
      if(timer==0){
      lancaProjetil();
      timer=1;
