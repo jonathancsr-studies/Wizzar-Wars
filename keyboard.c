@@ -7,11 +7,9 @@ int pot;
 int cheat;
 int pause;
 int forca;
+
 void teclasPressionada(unsigned char key, int x, int y){
   switch (key) {
-    case 82:
-      //reiniciaJogo();
-      break;
     case 27:
       exit(0);
       break;
@@ -50,6 +48,10 @@ void teclasPressionada(unsigned char key, int x, int y){
      }else{
           forca=1;
      }
+     break;
+     case 'r':
+     case 'R':
+     reiniciaJogo();
      break;
      default:
      break;

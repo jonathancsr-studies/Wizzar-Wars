@@ -19,4 +19,5 @@ void iniciaAstro();
 void movimentoAstro();
 void barraForca();
 void vento();
+void reiniciaJogo(void);
 #endif // CENARIO_H

@@ -1,5 +1,5 @@
 #include "include.h"
-
+//#include "SOIL.h"
 PREDIOS mapa[NUMPREDIOS];
 extern double velocidade = 0;
 extern int ativo;
@@ -21,7 +21,7 @@ void inicializa(void)
     inicializa_personagem();
     inicializa_Projetil();
     iniciaAstro();
-    glClearColor(1, 1, 1, 0);
+    glClearColor(0, 0, 0, 0);
     glutPostRedisplay();
 }
 

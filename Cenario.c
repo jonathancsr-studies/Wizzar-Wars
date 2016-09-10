@@ -8,6 +8,18 @@ PROJETIL A1,A2;
 ASTRO Sol;
 int varia=0;
 int forca;
+PREDIOS mapa [NUMPREDIOS];
+void reiniciaJogo(void)
+{
+    ativo = 1;
+    gerarMapa(mapa);
+    inicializa_personagem();
+    inicializa_Projetil();
+    iniciaAstro();
+    glClearColor(0, 0, 0, 0);
+    glutPostRedisplay();
+}
+
 void criarRetangulo(double largura, double altura){
   glBegin(GL_TRIANGLE_FAN);
     glVertex3f(0,0,0);
