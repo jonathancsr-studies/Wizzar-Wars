@@ -13,6 +13,7 @@ extern ASTRO Sol;
 extern int cheat=0;
 extern int new_w=0;
 extern int new_h=0;
+extern int forca = 1;
 void inicializa(void)
 {
     ativo = 1;

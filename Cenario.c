@@ -4,7 +4,10 @@ int timer;
 int pause;
 int ativo;
 double gravidade;
+PROJETIL A1,A2;
 ASTRO Sol;
+int varia=0;
+int forca;
 void criarRetangulo(double largura, double altura){
   glBegin(GL_TRIANGLE_FAN);
     glVertex3f(0,0,0);
@@ -74,12 +77,22 @@ void Timer(){
 
 void JogoRoda(){
 
+
 if(pause){
       if(timer)
       movimentoProjetil();
-      barraForca();
-}
       movimentoAstro();
+      if(forca){
+                  barraForca();
+                  velocidade+=varia;
+                  if(velocidade==0){
+                  varia = 1;
+                  }else{
+                  if(velocidade==100)
+                  varia =-1;
+            }
+      }
+}
       glutPostRedisplay();
       glutTimerFunc(20,JogoRoda,0);
 
@@ -122,30 +135,48 @@ void movimentoAstro(){
 
 void barraForca(){
 
-    int cont=0,i,x=0,y;
-    glTranslatef(LARGURA/2-50,25,0);
-    glPushMatrix();
-        glBegin(GL_TRIANGLE_FAN);
-            glVertex3f(0,0,0);
-            glVertex3f(x,0,0);
-            glVertex3f(x,20,0);
-            glVertex3f(0,20,0);
-        glEnd();
-    glPopMatrix();
+      if(pause){
+      glColor3f(1,0,0);
+      glBegin(GL_TRIANGLE_FAN);
+      glVertex3f((LARGURA/2)-50,ALTURA-40,0);
+      glVertex3f((LARGURA/2)-50+velocidade,ALTURA-40,0);
+      glVertex3f((LARGURA/2)-50+velocidade,ALTURA-10,0);
+      glVertex3f((LARGURA/2)-50,ALTURA-10,0);
+      glEnd();
+      }
+}
 
-    if(cont == 0)
-    {
-        x+=3;
-        velocidade+=5;
-        if(x>=100)
-            cont=1;
-    }else if(cont == 1)
-    {
-        x-=3;
-        velocidade-=5;
-        if(x<=0)
-        {
-            cont = 0;
-        }
-    }
+void vento(){
+
+      srand(time(0));
+      int i,f_vento,l_vento;
+      // d=0 esquerda d=1 direita
+
+      f_vento=rand()%100;
+      l_vento=rand()%10;
+
+      if(l_vento >= 0 && l_vento <= 5)
+         l_vento=0;
+      else
+         l_vento=1;
+
+      if(l_vento == 0)
+         printf("Vento para <<<\nvelocidade = %d\n",f_vento);
+      if(l_vento == 1)
+         printf("Vento para >>>\nvelocidade = %d\n",f_vento);
+
+      if(ativo)
+      {
+         if(l_vento==0)
+              A1.velocidade.x-=f_vento;
+         else if(l_vento==1)
+              A1.velocidade.x+=f_vento;
+      }else{
+         if(l_vento==0)
+              A2.velocidade.x+=f_vento;
+         else if(l_vento==1)
+              A2.velocidade.x-=f_vento;
+      }
+
+
 }

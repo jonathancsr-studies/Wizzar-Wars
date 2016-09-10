@@ -7,14 +7,16 @@ double gravidade;
 int ativo;
 int timer;
 int cheat;
+int pause;
+int forca;
 PREDIOS mapa[NUMPREDIOS];
 void lancaProjetil(){
       if(ativo){
-          A1.velocidade.x=cos(PI*A1.direcao/180)*(velocidade/50);
-          A1.velocidade.y=sin(PI*A1.direcao/180)*(velocidade/50);
+          A1.velocidade.x=cos(PI*A1.direcao/180)*(velocidade/4);
+          A1.velocidade.y=sin(PI*A1.direcao/180)*(velocidade/4);
     }else{
-          A2.velocidade.x=(cos(PI*A2.direcao/180)*(velocidade/50))*(-1);
-          A2.velocidade.y=sin(PI*A2.direcao/180)*(velocidade/50);
+          A2.velocidade.x=(cos(PI*A2.direcao/180)*(velocidade/4))*(-1);
+          A2.velocidade.y=sin(PI*A2.direcao/180)*(velocidade/4);
    }
 
 }
@@ -40,6 +42,7 @@ int i;
                A2.posicao.x=A2.posicao_inicial.x;
                A2.posicao.y=A2.posicao_inicial.y;
                timer=0;
+               forca=1;
                if(ativo){
                ativo=0;
          }else{
@@ -55,6 +58,7 @@ int i;
                            A1.posicao.y=A1.posicao_inicial.y;
                            timer=0;
                            ativo=0;
+                           forca=1;
 
                      }
                }
@@ -65,6 +69,7 @@ int i;
                            A2.posicao.y=A2.posicao_inicial.y;
                            timer=0;
                            ativo=1;
+                           forca=1;
                      }
                }
          }
@@ -77,6 +82,7 @@ int i;
                            A1.posicao.y=A1.posicao_inicial.y;
                            p2.vida--;
                            timer=0;
+                           forca=1;
                            printf("\nACERTEI NO SEGUNDO\t\n %d",p2.vida);
                            if(ativo){
                                 ativo=0;
@@ -92,6 +98,7 @@ int i;
                            A2.posicao.x=A2.posicao_inicial.x;
                            A2.posicao.y=A2.posicao_inicial.y;
                            timer=0;
+                           forca=1;
                            p1.vida--;
                            printf("\nACERTEI NO PRIMEIRO\t\n %d",p1.vida);
                            if(ativo){
@@ -144,18 +151,19 @@ void inicializa_Projetil(){
 void geraTrajetoria(){
 	int i,j,v=0;
    double x,y,velocidade_x,velocidade_y;
+if(pause)
 if(cheat){
       if(timer==0){
             if(ativo){
                 x=A1.posicao.x+LARGURAPROJETIL;
                 y=A1.posicao.y;
-                velocidade_x=cos(PI*A1.direcao/180)*(velocidade/50);
-                velocidade_y=sin(PI*A1.direcao/180)*(velocidade/50);
+                velocidade_x=cos(PI*A1.direcao/180)*(velocidade/4);
+                velocidade_y=sin(PI*A1.direcao/180)*(velocidade/4);
           }else{
                 x=A2.posicao.x;
                 y=A2.posicao.y;
-                velocidade_x=(cos(PI*A2.direcao/180)*(velocidade/50))*(-1);
-                velocidade_y=sin(PI*A2.direcao/180)*(velocidade/50);
+                velocidade_x=(cos(PI*A2.direcao/180)*(velocidade/4))*(-1);
+                velocidade_y=sin(PI*A2.direcao/180)*(velocidade/4);
                }
 
          glColor3f(1,0,0);
@@ -213,29 +221,29 @@ if(cheat){
 void geraAngulo(){
       int i;
       double x,y,velocidade_x,velocidade_y;
+      if(pause)
       if(timer==0){
       if(ativo){
           x=A1.posicao.x+LARGURAPROJETIL;
           y=A1.posicao.y;
-          velocidade_x=cos(PI*A1.direcao/180)*(velocidade/50);
-          velocidade_y=sin(PI*A1.direcao/180)*(velocidade/50);
+          velocidade_x=cos(PI*A1.direcao/180);
+          velocidade_y=sin(PI*A1.direcao/180);
    }else{
           x=A2.posicao.x;
           y=A2.posicao.y;
-          velocidade_x=(cos(PI*A2.direcao/180)*(velocidade/50))*(-1);
-          velocidade_y=sin(PI*A2.direcao/180)*(velocidade/50);
+          velocidade_x=cos(PI*A2.direcao/180)*(-1);
+          velocidade_y=sin(PI*A2.direcao/180);
          }
 
       glColor3f(1,0,0);
 
       glBegin(GL_LINE_STRIP);
 
-      for(i=0;i<10;i++)
+      for(i=0;i<70;i++)
       {
       glVertex3f(x,y,0);
       x+=velocidade_x;
       y+=velocidade_y;
-      velocidade_y-=gravidade;
       }
       glEnd();
 }
