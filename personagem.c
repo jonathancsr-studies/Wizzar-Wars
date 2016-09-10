@@ -5,8 +5,18 @@ extern PREDIOS mapa[NUMPREDIOS];
 
 
 void desenhaPersonagem(){
-      glColor3f(1,1,0);
-      criarRetangulo(LARGURAPERSONAGEM,ALTURAPERSONAGEM);
+
+      glEnable(GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, textura_mago1);
+        criarRetangulo(LARGURAPERSONAGEM,ALTURAPERSONAGEM);
+  glBegin(GL_TRIANGLE_FAN);
+    glTexCoord2f(0, 0); glVertex3f(-1, -1,  0);
+    glTexCoord2f(1, 0); glVertex3f( 1, -1,  0);
+    glTexCoord2f(1, 1); glVertex3f( 1,  1,  0);
+    glTexCoord2f(0, 1); glVertex3f(-1,  1,  0);
+  glEnd();
+  glDisable(GL_TEXTURE_2D);
+
 }
 void movimentoPersonagem(float x,float y){
 

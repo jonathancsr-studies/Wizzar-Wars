@@ -1,5 +1,5 @@
 #include "include.h"
-//#include "SOIL.h"
+
 PREDIOS mapa[NUMPREDIOS];
 extern double velocidade = 0;
 extern int ativo;
@@ -14,6 +14,7 @@ extern int cheat=0;
 extern int new_w=0;
 extern int new_h=0;
 extern int forca = 1;
+
 void inicializa(void)
 {
     ativo = 1;
@@ -23,6 +24,7 @@ void inicializa(void)
     iniciaAstro();
     glClearColor(0, 0, 0, 0);
     glutPostRedisplay();
+    inittext();
 }
 
 void redimensionada(int w, int h)

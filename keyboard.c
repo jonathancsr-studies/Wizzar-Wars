@@ -108,7 +108,7 @@ if(pause)
              A1.direcao--;
       }
       else
-      if(A1.direcao > 0)
+      if(A2.direcao > 0)
              A2.direcao--;
       break;
      default:
