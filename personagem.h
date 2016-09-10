@@ -4,6 +4,7 @@
 void movimentoPersonagem(float x,float y);
 void desenhaPersonagem();
 void inicializa_personagem();
+void criarPersonagem(double largura, double altura);
 
 typedef struct Personagem{
       double posicao[2];

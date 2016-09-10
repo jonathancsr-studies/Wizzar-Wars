@@ -114,6 +114,6 @@ if(pause)
      default:
         break;
   }
-  glutPostRedisplay();
+//  glutPostRedisplay();
  }
 }

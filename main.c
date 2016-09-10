@@ -23,8 +23,9 @@ void inicializa(void)
     inicializa_Projetil();
     iniciaAstro();
     glClearColor(0, 0, 0, 0);
-    glutPostRedisplay();
     inittext();
+    glutPostRedisplay();
+
 }
 
 void redimensionada(int w, int h)
@@ -66,7 +67,10 @@ void desenhaCena(){
   geraAngulo();
   glutSwapBuffers();
 }
-
+void Idle()
+{
+  glutPostRedisplay();
+}
 int main(int argc, char **argv) {
 
       glutInit(&argc, argv);
@@ -81,6 +85,7 @@ int main(int argc, char **argv) {
       glutReshapeFunc(redimensionada);
       glutKeyboardFunc(teclasPressionada);
       glutSpecialFunc(setasPressionadas);
+      glutIdleFunc(Idle);
 //      glutMouseFunc(mouse);
       glutTimerFunc(0,JogoRoda,0);
 
