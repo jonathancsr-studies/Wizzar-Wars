@@ -77,6 +77,7 @@ if(pause)
                 A2.posicao_inicial.x+=TRANSLADA;
             }
       }
+      mage_3_Idle();
       break;
     case GLUT_KEY_LEFT:
         if(ativo){

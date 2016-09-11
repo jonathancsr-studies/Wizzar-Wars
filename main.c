@@ -23,14 +23,13 @@ void inicializa(void)
     inicializa_Projetil();
     iniciaAstro();
     glClearColor(0, 0, 0, 0);
-    inittext();
+
     glutPostRedisplay();
 
 }
-
 void redimensionada(int w, int h)
 {
-      double area=w/h;
+    double area=w/h;
 
       if(area > 16/9)
       {
@@ -48,10 +47,8 @@ void redimensionada(int w, int h)
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
    glOrtho(0.0, LARGURA, 0.0, ALTURA, -1.0, 1.0);
-   //gluPerspective(30.0, (1440)/(900) , 1.0, 0.0);
 
    glMatrixMode(GL_MODELVIEW);
-   glLoadIdentity();
 }
 
 void desenhaCena(){
@@ -76,7 +73,7 @@ int main(int argc, char **argv) {
       glutInit(&argc, argv);
       glutInitContextVersion(1,1);
       glutInitContextProfile(GLUT_COMPATIBILITY_PROFILE);
-      glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
+      glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
       glutInitWindowSize(ALTURA,LARGURA);
       glutInitWindowPosition(0,0);
       glutCreateWindow("JOGO");
@@ -89,6 +86,7 @@ int main(int argc, char **argv) {
 //      glutMouseFunc(mouse);
       glutTimerFunc(0,JogoRoda,0);
 
+    inittexture();
       inicializa();
       glutMainLoop();
       return 0;

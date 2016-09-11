@@ -74,11 +74,32 @@ void gerarMapa(PREDIOS* predio) {
             cont+=LARGURA/NUMPREDIOS;
       }
 }
+GLuint texturaMario;
+void init(void)
+{
+    glClearColor (1, 1, 1, 0);
+
+    texturaMario = SOIL_load_OGL_texture(
+        "mario.png",
+        SOIL_LOAD_AUTO,
+        SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_INVERT_Y
+	);
+    glEnable( GL_BLEND );
+    glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+
+    if (texturaMario == 0) {
+        printf("Erro do SOIL: '%s'\n", SOIL_last_result());
+    }
+}
 
 void planodeFundo(){
   glClear(GL_COLOR_BUFFER_BIT);
       glColor3f(0,0,0.3);
-      criarRetangulo(LARGURA,ALTURA);
+  glEnable(GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texturaMario);
+    criarRetangulo(LARGURA,ALTURA);
+  glDisable(GL_TEXTURE_2D);
 }
 
 void Timer(){
