@@ -46,7 +46,6 @@ for (i = 0; i < NUMPREDIOS; i++) {
       }
 }
 void gerarMapa(PREDIOS* predio) {
-
      srand(time(0));
       int i;
       int cont=0,y;
@@ -98,7 +97,7 @@ void planodeFundo(){
       glColor3f(0,0,0.3);
   glEnable(GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, texturaMario);
-    criarRetangulo(LARGURA,ALTURA);
+      criarRetangulo(LARGURA,ALTURA);
   glDisable(GL_TEXTURE_2D);
 }
 

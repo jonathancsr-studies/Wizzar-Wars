@@ -1,6 +1,7 @@
 #ifndef PERSONAGEM_H
 #define PERSONAGEM_H
 
+
 void movimentoPersonagem(float x,float y);
 void desenhaPersonagem();
 void inicializa_personagem();

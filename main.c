@@ -23,7 +23,6 @@ void inicializa(void)
     inicializa_Projetil();
     iniciaAstro();
     glClearColor(0, 0, 0, 0);
-
     glutPostRedisplay();
 
 }
@@ -85,8 +84,9 @@ int main(int argc, char **argv) {
       glutIdleFunc(Idle);
 //      glutMouseFunc(mouse);
       glutTimerFunc(0,JogoRoda,0);
+      glutTimerFunc(50,mage_3_Idle,0);
 
-    inittexture();
+      inittexture();
       inicializa();
       glutMainLoop();
       return 0;
