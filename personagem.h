@@ -2,7 +2,7 @@
 #define PERSONAGEM_H
 
 
-void movimentoPersonagem(float x,float y);
+void movimentoPersonagem(float x,float y,int k);
 void desenhaPersonagem();
 void inicializa_personagem();
 void criarPersonagem(double largura, double altura);

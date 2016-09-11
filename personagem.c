@@ -13,29 +13,20 @@ void geradorDePersonagem(double largura, double altura){
           glTexCoord2f(0.0, 1.0); glVertex3f(       0,  altura,  0);
       glEnd();
 }
-void movimentoPersonagem(float x,float y){
+void movimentoPersonagem(float x,float y,int k){
 
       glPushMatrix();
             glTranslatef(x, y,0);
             glColor3f (1, 1, 1);
             glEnable(GL_TEXTURE_2D);
-            glBindTexture(GL_TEXTURE_2D, textureuse_mage3);
+            if(k == 0)
+              glBindTexture(GL_TEXTURE_2D, textureuse_mage3);
+            else if(k == 1)
+              glBindTexture(GL_TEXTURE_2D, textureuse_mage4);
               geradorDePersonagem(LARGURAPERSONAGEM,ALTURAPERSONAGEM);
             glDisable(GL_TEXTURE_2D);
       glPopMatrix();
 }
-void movimentoPersonagem_2(float x,float y){
-
-      glPushMatrix();
-            glTranslatef(x, y,0);
-            glColor3f (1, 1, 1);
-            glEnable(GL_TEXTURE_2D);
-            glBindTexture(GL_TEXTURE_2D, textureuse_mage4);
-              geradorDePersonagem(LARGURAPERSONAGEM,ALTURAPERSONAGEM);
-            glDisable(GL_TEXTURE_2D);
-      glPopMatrix();
-}
-
 void inicializa_personagem(){
       p1.posicao[0]=mapa[0].cont+rand()%30;
       p2.posicao[0]=mapa[NUMPREDIOS-1].cont+rand()%30;

@@ -34,18 +34,10 @@ void teclasPressionada(unsigned char key, int x, int y){
      }
      break;
      case' ':
-    if(forca==0)
+     if(forca==0)
      if(timer==0){
-
-     if(ativo){
-        swap_texture_attack_mage_3 = 0;
-        glutTimerFunc(0,mage_3_Attack,0);
-     }else{
-        swap_texture_attack_mage_4=0;
-        glutTimerFunc(0,mage_4_Attack,0);
-     }
-     lancaProjetil();
-     timer=1;
+       lancaProjetil();
+       timer=1;
       }
         break;
       case 70:
@@ -127,6 +119,5 @@ if(pause)
      default:
         break;
   }
-//  glutPostRedisplay();
  }
 }

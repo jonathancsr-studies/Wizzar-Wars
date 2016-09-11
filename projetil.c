@@ -19,7 +19,6 @@ void lancaProjetil(){
           A2.velocidade.x=(cos(PI*A2.direcao/180)*(velocidade/5))*(-1);
           A2.velocidade.y=sin(PI*A2.direcao/180)*(velocidade/5);
    }
-
 }
 void movimentoProjetil(){
 

@@ -53,8 +53,8 @@ void redimensionada(int w, int h)
 void desenhaCena(){
   planodeFundo();
   desenhaCenaInicialJogo(mapa);
-  movimentoPersonagem(p1.posicao[0],p1.posicao[1]);
-  movimentoPersonagem_2(p2.posicao[0],p2.posicao[1]);
+  movimentoPersonagem(p1.posicao[0],p1.posicao[1],0);
+  movimentoPersonagem(p2.posicao[0],p2.posicao[1],1);
   criaProjetil();
   criaAstro();
   telaPause();
@@ -85,6 +85,7 @@ int main(int argc, char **argv) {
 //      glutMouseFunc(mouse);
       glutTimerFunc(0,JogoRoda,0);
       glutTimerFunc(50,mage_3_Idle,0);
+      glutTimerFunc(50,mage_4_Idle,0);
 
       inittexture();
       inicializa();
