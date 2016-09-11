@@ -54,7 +54,7 @@ void desenhaCena(){
   planodeFundo();
   desenhaCenaInicialJogo(mapa);
   movimentoPersonagem(p1.posicao[0],p1.posicao[1]);
-  movimentoPersonagem(p2.posicao[0],p2.posicao[1]);
+  movimentoPersonagem_2(p2.posicao[0],p2.posicao[1]);
   criaProjetil();
   criaAstro();
   telaPause();

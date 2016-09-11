@@ -9,6 +9,7 @@ int timer;
 int cheat;
 int pause;
 int forca;
+extern int swap_texture_damage_mage_3;
 PREDIOS mapa[NUMPREDIOS];
 void lancaProjetil(){
       if(ativo){
@@ -83,6 +84,12 @@ int i;
                            p2.vida--;
                            timer=0;
                            forca=1;
+                           //     ANIMAÇÃO DE TEXTURA
+                               glutTimerFunc(0,mage_4_Damage,0);
+                               p2.posicao[0]+=TRANSLADA;
+                               A2.posicao.x+=TRANSLADA;
+                               A2.posicao_inicial.x+=TRANSLADA;
+                           //     FIM DA ANIMAÇÃO DE TEXTURA
                            printf("\nACERTEI NO SEGUNDO\t\n %d",p2.vida);
                            if(ativo){
                                 ativo=0;
@@ -100,7 +107,13 @@ int i;
                            timer=0;
                            forca=1;
                            p1.vida--;
-                           printf("\nACERTEI NO PRIMEIRO\t\n %d",p1.vida);
+                           //    ANIMAÇÃO DE TEXTURA
+                               swap_texture_damage_mage_3 = 0;
+                               glutTimerFunc(0,mage_3_Damage,0);
+                               p1.posicao[0]-=5*TRANSLADA;
+                               A1.posicao.x-=5*TRANSLADA;
+                               A1.posicao_inicial.x-=5*TRANSLADA;
+                           //    FIM DA ANIMAÇÃO DE TEXTURA
                            if(ativo){
                                 ativo=0;
                            }else{
@@ -110,9 +123,12 @@ int i;
    		}
    	}
       cheat=0;
-   	if(p1.vida==0||p2.vida==0){
-
-
+   	if(p1.vida == 0||p2.vida == 0){
+      if (p1.vida == 0) {
+        glutTimerFunc(0,mage_3_Die,0);
+      }else if(p2.vida == 0){
+        glutTimerFunc(0,mage_4_Die,0);
+      }
    	}
 }
 

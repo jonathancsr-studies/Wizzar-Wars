@@ -2,14 +2,15 @@
 PERSONAGEM p1,p2;
 extern PREDIOS mapa[NUMPREDIOS];
 extern unsigned int textureuse_mage3;
+extern unsigned int textureuse_mage4;
 
 void geradorDePersonagem(double largura, double altura){
 
       glBegin(GL_TRIANGLE_FAN);
-          glTexCoord2f(0.0, 0.0); glVertex3f( 0, 0,  0);
-          glTexCoord2f(1.0, 0.0); glVertex3f( largura, 0,  0);
+          glTexCoord2f(0.0, 0.0); glVertex3f(       0,       0,  0);
+          glTexCoord2f(1.0, 0.0); glVertex3f( largura,       0,  0);
           glTexCoord2f(1.0, 1.0); glVertex3f( largura,  altura,  0);
-          glTexCoord2f(0.0, 1.0); glVertex3f(0,  altura,  0);
+          glTexCoord2f(0.0, 1.0); glVertex3f(       0,  altura,  0);
       glEnd();
 }
 void movimentoPersonagem(float x,float y){
@@ -19,6 +20,17 @@ void movimentoPersonagem(float x,float y){
             glColor3f (1, 1, 1);
             glEnable(GL_TEXTURE_2D);
             glBindTexture(GL_TEXTURE_2D, textureuse_mage3);
+              geradorDePersonagem(LARGURAPERSONAGEM,ALTURAPERSONAGEM);
+            glDisable(GL_TEXTURE_2D);
+      glPopMatrix();
+}
+void movimentoPersonagem_2(float x,float y){
+
+      glPushMatrix();
+            glTranslatef(x, y,0);
+            glColor3f (1, 1, 1);
+            glEnable(GL_TEXTURE_2D);
+            glBindTexture(GL_TEXTURE_2D, textureuse_mage4);
               geradorDePersonagem(LARGURAPERSONAGEM,ALTURAPERSONAGEM);
             glDisable(GL_TEXTURE_2D);
       glPopMatrix();

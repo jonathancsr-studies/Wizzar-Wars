@@ -8,7 +8,7 @@ int cheat;
 int pause;
 int forca;
 extern int swap_texture_attack_mage_3;
-
+extern int swap_texture_attack_mage_4;
 
 void teclasPressionada(unsigned char key, int x, int y){
   switch (key) {
@@ -37,8 +37,13 @@ void teclasPressionada(unsigned char key, int x, int y){
     if(forca==0)
      if(timer==0){
 
-     swap_texture_attack_mage_3 = 0;
-     glutTimerFunc(0,mage_3_Attack,0);
+     if(ativo){
+        swap_texture_attack_mage_3 = 0;
+        glutTimerFunc(0,mage_3_Attack,0);
+     }else{
+        swap_texture_attack_mage_4=0;
+        glutTimerFunc(0,mage_4_Attack,0);
+     }
      lancaProjetil();
      timer=1;
       }
@@ -73,13 +78,14 @@ if(pause)
                 p1.posicao[0]+=TRANSLADA;
                 A1.posicao.x+=TRANSLADA;
                 A1.posicao_inicial.x+=TRANSLADA;
-                  mage_3_Walk();
+                mage_3_Walk();
         }
  }else{
             if(p2.posicao[0]<LARGURA-LARGURAPERSONAGEM){
                 p2.posicao[0]+=TRANSLADA;
                 A2.posicao.x+=TRANSLADA;
                 A2.posicao_inicial.x+=TRANSLADA;
+                mage_4_Walk();
             }
       }
       break;
@@ -89,13 +95,14 @@ if(pause)
                 p1.posicao[0]-=TRANSLADA;
                 A1.posicao.x-=TRANSLADA;
                 A1.posicao_inicial.x-=TRANSLADA;
-                  mage_3_Walk_2();
+                mage_3_Walk_2();
         }
             }else{
             if(p2.posicao[0]>(LARGURA - (LARGURA/NUMPREDIOS))){
                 p2.posicao[0]-=TRANSLADA;
                 A2.posicao.x-=TRANSLADA;
                 A2.posicao_inicial.x-=TRANSLADA;
+                mage_4_Walk();
             }
       }
       break;
