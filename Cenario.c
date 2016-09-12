@@ -1,3 +1,4 @@
+
 #include "include.h"
 double velocidade;
 int timer;
@@ -9,8 +10,8 @@ ASTRO Sol;
 int varia=0;
 int forca;
 PREDIOS mapa [NUMPREDIOS];
-void reiniciaJogo(void)
-{
+
+void reiniciaJogo(void){
     ativo = 1;
     gerarMapa(mapa);
     inicializa_personagem();
@@ -30,7 +31,7 @@ void criarRetangulo(double largura, double altura){
 }
 
 void desenhaCenaInicialJogo(PREDIOS predio[]){
- int i;
+int i;
 for (i = 0; i < NUMPREDIOS; i++) {
                   glColor3f(1,0.5,0.6);
 
@@ -40,11 +41,11 @@ for (i = 0; i < NUMPREDIOS; i++) {
             glVertex3f(LARGURA/NUMPREDIOS+predio[i].cont,0,0);
             glVertex3f(LARGURA/NUMPREDIOS+predio[i].cont,predio[i].y,0);
             glVertex3f(0+predio[i].cont,predio[i].y,0);
-
       glEnd();
 
       }
 }
+
 void gerarMapa(PREDIOS* predio) {
      srand(time(0));
       int i;
@@ -73,43 +74,22 @@ void gerarMapa(PREDIOS* predio) {
             cont+=LARGURA/NUMPREDIOS;
       }
 }
-GLuint texturaMario;
-void init(void)
-{
-    glClearColor (1, 1, 1, 0);
 
-    texturaMario = SOIL_load_OGL_texture(
-        "mario.png",
-        SOIL_LOAD_AUTO,
-        SOIL_CREATE_NEW_ID,
-		SOIL_FLAG_INVERT_Y
-	);
-    glEnable( GL_BLEND );
-    glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
 
-    if (texturaMario == 0) {
-        printf("Erro do SOIL: '%s'\n", SOIL_last_result());
-    }
-}
 
 void planodeFundo(){
   glClear(GL_COLOR_BUFFER_BIT);
       glColor3f(0,0,0.3);
-  glEnable(GL_TEXTURE_2D);
-  glBindTexture(GL_TEXTURE_2D, texturaMario);
+//  glEnable(GL_TEXTURE_2D);
+//  glBindTexture(GL_TEXTURE_2D, texturaMario);
       criarRetangulo(LARGURA,ALTURA);
-  glDisable(GL_TEXTURE_2D);
+//  glDisable(GL_TEXTURE_2D);
 }
 
 void Timer(){
-
-
-
 }
 
 void JogoRoda(){
-
-
 if(pause){
       if(timer)
       movimentoProjetil();
@@ -135,9 +115,7 @@ void telaPause(){
       if(pause==0){
       glColor3f(0,1,0);
       criarRetangulo(LARGURA,ALTURA);
-
       }
-
 }
 
 void iniciaAstro(){
@@ -179,7 +157,6 @@ void barraForca(){
 }
 
 void vento(){
-
       srand(time(0));
       int i,f_vento,l_vento;
       // d=0 esquerda d=1 direita
@@ -209,6 +186,4 @@ void vento(){
          else if(l_vento==1)
               A2.velocidade.x-=f_vento;
       }
-
-
 }

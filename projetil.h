@@ -13,6 +13,7 @@ typedef struct Projetil{
       int direcao;
 }PROJETIL;
 
+void criarProjetil(double largura, double altura,int k);
 void movimentoProjetil();
 void criaProjetil();
 void lancaProjetil();

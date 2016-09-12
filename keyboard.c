@@ -9,6 +9,7 @@ int pause;
 int forca;
 extern int swap_texture_attack_mage_3;
 extern int swap_texture_attack_mage_4;
+extern int ativa_projetil;
 
 void teclasPressionada(unsigned char key, int x, int y){
   switch (key) {
@@ -36,6 +37,7 @@ void teclasPressionada(unsigned char key, int x, int y){
      case' ':
      if(forca==0)
      if(timer==0){
+       ativa_projetil=1;
        lancaProjetil();
        timer=1;
       }

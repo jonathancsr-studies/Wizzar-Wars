@@ -14,6 +14,7 @@ extern int cheat=0;
 extern int new_w=0;
 extern int new_h=0;
 extern int forca = 1;
+extern int ativa_projetil;
 
 void inicializa(void)
 {
@@ -26,6 +27,7 @@ void inicializa(void)
     glutPostRedisplay();
 
 }
+
 void redimensionada(int w, int h)
 {
     double area=w/h;
@@ -55,18 +57,20 @@ void desenhaCena(){
   desenhaCenaInicialJogo(mapa);
   movimentoPersonagem(p1.posicao[0],p1.posicao[1],0);
   movimentoPersonagem(p2.posicao[0],p2.posicao[1],1);
-  criaProjetil();
   criaAstro();
   telaPause();
+  if(ativa_projetil == 1)
+    criaProjetil();
   geraTrajetoria();
   barraForca();
   geraAngulo();
   glutSwapBuffers();
 }
-void Idle()
-{
+
+void Idle(){
   glutPostRedisplay();
 }
+
 int main(int argc, char **argv) {
 
       glutInit(&argc, argv);
