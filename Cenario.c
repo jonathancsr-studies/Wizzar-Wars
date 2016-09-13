@@ -1,7 +1,7 @@
 
 #include "include.h"
 double velocidade;
-int timer;
+int timer,j;
 int pause;
 int ativo;
 double gravidade;
@@ -33,15 +33,33 @@ void criarRetangulo(double largura, double altura){
 void desenhaCenaInicialJogo(PREDIOS predio[]){
 int i;
 for (i = 0; i < NUMPREDIOS; i++) {
-                  glColor3f(1,0.5,0.6);
+
+      glColor3f(0.501, 0.501, 0.501);
 
       glBegin(GL_TRIANGLE_FAN);
      //          x  y  z
             glVertex3f(0+predio[i].cont,0,0);
-            glVertex3f(LARGURA/NUMPREDIOS+predio[i].cont,0,0);
-            glVertex3f(LARGURA/NUMPREDIOS+predio[i].cont,predio[i].y,0);
+            glVertex3f(LARGURA/NUMPREDIOS+predio[i].cont-5,0,0);
+            glVertex3f(LARGURA/NUMPREDIOS+predio[i].cont-5,predio[i].y,0);
             glVertex3f(0+predio[i].cont,predio[i].y,0);
       glEnd();
+for (j = 0; j < ; j++) {
+  glColor3f()
+
+
+}
+      glColor3f(0.3, 0.3, 0.3);
+      glBegin(GL_TRIANGLE_FAN);
+     //          x  y  z
+            glVertex3f(0+predio[i].cont+55,0,0);
+            glVertex3f(LARGURA/NUMPREDIOS+predio[i].cont,0,0);
+            glVertex3f(LARGURA/NUMPREDIOS+predio[i].cont,predio[i].y-10,0);
+            glVertex3f(0+predio[i].cont+55,predio[i].y,0);
+      glEnd();
+
+
+
+
 
       }
 }

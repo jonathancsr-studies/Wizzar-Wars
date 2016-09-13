@@ -6,6 +6,9 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 #include <SOIL/SOIL.h>
+#include <SDL.h>
+#include <SDL/SDL_audio.h>
+#include <SDL/SDL_mixer.h>
 #include <string.h>
 #include <time.h>
 #include <math.h>
@@ -15,6 +18,7 @@
 #include "cenario.h"
 #include "keyboard.h"
 #include "textura.h"
+#include "music.h"
 
 #define TRANSLADA 1
 #define LARGURA 720
