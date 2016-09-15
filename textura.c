@@ -1,20 +1,20 @@
 #include "include.h"
 extern int ativa_projetil;
 
-int swap_texture_idle_mage_3=0,
-    swap_texture_walk_mage_3=0,
-    swap_texture_attack_mage_3=0,
-    swap_texture_damage_mage_3=0,
-    swap_texture_die_mage_3=0,
-    swap_texture_idle_mage_4=0,
-    swap_texture_walk_mage_4=0,
-    swap_texture_attack_mage_4=0,
-    swap_texture_damage_mage_4=0,
-    swap_texture_die_mage_4=0,
-    swap_texture_projetil_idle_mage_3,
-    swap_texture_projetil_colision_mage_3,
-    swap_texture_projetil_idle_mage_4,
-    swap_texture_projetil_colision_mage_4;
+int swap_texture_idle_mage_3=-1,
+    swap_texture_walk_mage_3=-1,
+    swap_texture_attack_mage_3=-1,
+    swap_texture_damage_mage_3=-1,
+    swap_texture_die_mage_3=-1,
+    swap_texture_idle_mage_4=-1,
+    swap_texture_walk_mage_4=-1,
+    swap_texture_attack_mage_4=-1,
+    swap_texture_damage_mage_4=-1,
+    swap_texture_die_mage_4=-1,
+    swap_texture_projetil_idle_mage_3=-1,
+    swap_texture_projetil_colision_mage_3=-1,
+    swap_texture_projetil_idle_mage_4=-1,
+    swap_texture_projetil_colision_mage_4=-1;
 
 void setTextureUse_Mage(int k,int c){
     if(c == 0 && k == 0)
@@ -88,32 +88,43 @@ unsigned int loadTexture_2(char nometextura[]){
 void inittexture(){
   mage_3_Idle();
   mage_4_Idle();
+  Mage_3_projetil_idle();
+  Mage_4_projetil_idle();
 }
 
 void mage_3_Idle(){
     setTextureUse_Mage(0,0);
+    int i;
+for (i = 0; i < 10; i++,swap_texture_idle_mage_3++) {
+      if(swap_texture_idle_mage_3==-1)
+        break;
+      if(swap_texture_idle_mage_3 == 0){
+    		mage_3_idle = loadTexture("./Mage_3/mage_3_Idle_0.png");
+      }else if(swap_texture_idle_mage_3 == 20){
+    		mage_3_idle = loadTexture("./Mage_3/mage_3_Idle_1.png");
+      }else if(swap_texture_idle_mage_3 == 40){
+    		mage_3_idle = loadTexture("./Mage_3/mage_3_Idle_2.png");
+    	}else if(swap_texture_idle_mage_3 == 60){
+    		mage_3_idle = loadTexture("./Mage_3/mage_3_Idle_3.png");
+      }else if(swap_texture_idle_mage_3 == 80){
+    		mage_3_idle = loadTexture("./Mage_3/mage_3_Idle_4.png");
+      }else if(swap_texture_idle_mage_3 == 100){
+    		{
+            mage_3_idle = loadTexture("./Mage_3/mage_3_Idle_5.png");
+            swap_texture_idle_mage_3=0;
+        }
+        glutPostRedisplay();
+    	}
+}
 
-    if(swap_texture_idle_mage_3 == 0){
-  		mage_3_idle = loadTexture("./Mage_3/mage_3_Idle_0.png");
-    }else if(swap_texture_idle_mage_3 == 1){
-  		mage_3_idle = loadTexture("./Mage_3/mage_3_Idle_1.png");
-    }else if(swap_texture_idle_mage_3 == 2){
-  		mage_3_idle = loadTexture("./Mage_3/mage_3_Idle_2.png");
-  	}else if(swap_texture_idle_mage_3 == 3){
-  		mage_3_idle = loadTexture("./Mage_3/mage_3_Idle_3.png");
-    }else if(swap_texture_idle_mage_3 == 4){
-  		mage_3_idle = loadTexture("./Mage_3/mage_3_Idle_4.png");
-    }else if(swap_texture_idle_mage_3 == 5){
-  		mage_3_idle = loadTexture("./Mage_3/mage_3_Idle_5.png");
-  	}
-    swap_texture_idle_mage_3+=1;
+/*
     if(swap_texture_idle_mage_3 == 5)
         swap_texture_idle_mage_3 =0;
     glutTimerFunc(500,mage_3_Idle,1);
+*/
 }
 
 void mage_3_Walk(){
-    setTextureUse_Mage(0,1);
 
     if(swap_texture_walk_mage_3 == 0){
         mage_3_walk = loadTexture("./Mage_3/mage_3_Walk_0.png");
@@ -139,7 +150,6 @@ void mage_3_Walk(){
 }
 
 void mage_3_Walk_2(){
-      setTextureUse_Mage(0,1);
 
       if(swap_texture_walk_mage_3 == 0){
           mage_3_walk = loadTexture_2("./Mage_3/mage_3_Walk_0.png");
@@ -209,7 +219,6 @@ void mage_3_Damage(){
 }
 
 void mage_3_Die(){
-    setTextureUse_Mage(0,4);
 
     if(swap_texture_die_mage_3 ==0){
         mage_3_die = loadTexture("./Mage_3/mage_3_Die_0.png");
@@ -227,6 +236,50 @@ void mage_3_Die(){
     swap_texture_die_mage_3++;
     if(swap_texture_die_mage_3 != 6)
       glutTimerFunc(80,mage_3_Die,1);
+}
+
+void Mage_3_projetil_idle(){
+
+  if(swap_texture_projetil_idle_mage_3 == 0){
+      mage_3_projetil_idle = loadTexture("./Mage_3/mage_3_projetil_idle_0.png");
+  }else if(swap_texture_projetil_idle_mage_3 == 1){
+      mage_3_projetil_idle = loadTexture("./Mage_3/mage_3_projetil_idle_1.png");
+  }else if(swap_texture_projetil_idle_mage_3 == 2){
+      mage_3_projetil_idle = loadTexture("./Mage_3/mage_3_projetil_idle_2.png");
+  }else if(swap_texture_projetil_idle_mage_3 == 3){
+      mage_3_projetil_idle = loadTexture("./Mage_3/mage_3_projetil_idle_3.png");
+  }else if(swap_texture_projetil_idle_mage_3 == 4){
+      mage_3_projetil_idle = loadTexture("./Mage_3/mage_3_projetil_idle_4.png");
+  }else if(swap_texture_projetil_idle_mage_3 == 5){
+      mage_3_projetil_idle = loadTexture("./Mage_3/mage_3_projetil_idle_5.png");
+  }
+
+  swap_texture_projetil_idle_mage_3++;
+  if(swap_texture_projetil_idle_mage_3 <= 5 && swap_texture_projetil_idle_mage_3 >= 0 )
+    glutTimerFunc(10,Mage_3_projetil_idle,1);
+}
+
+void Mage_3_projetil_colision(){
+  setTextureUse_Mage(0,6);
+
+  if(swap_texture_projetil_colision_mage_3 == 0){
+      mage_3_projetil_colision = loadTexture("./Mage_3/mage_3_projetil_colision_1.png");
+  }else if(swap_texture_projetil_colision_mage_3 == 1){
+      mage_3_projetil_colision = loadTexture("./Mage_3/mage_3_projetil_colision_2.png");
+  }else if(swap_texture_projetil_colision_mage_3 == 2){
+      mage_3_projetil_colision = loadTexture("./Mage_3/mage_3_projetil_colision_3.png");
+  }else if(swap_texture_projetil_colision_mage_3 == 3){
+      mage_3_projetil_colision = loadTexture("./Mage_3/mage_3_projetil_colision_4.png");
+  }else if(swap_texture_projetil_colision_mage_3 == 4){
+      mage_3_projetil_colision = loadTexture("./Mage_3/mage_3_projetil_colision_5.png");
+  }else if(swap_texture_projetil_colision_mage_3 == 5){
+      mage_3_projetil_colision = loadTexture("./Mage_3/mage_3_projetil_colision_6.png");
+      ativa_projetil=0;
+  }
+
+  swap_texture_projetil_colision_mage_3++;
+  if(swap_texture_projetil_colision_mage_3 != 5)
+    glutTimerFunc(40,Mage_3_projetil_colision,1);
 }
 
 void mage_4_Idle(){
@@ -309,8 +362,6 @@ void mage_4_Damage(){
 }
 
 void mage_4_Die(){
-  setTextureUse_Mage(1,4);
-
   if(swap_texture_die_mage_4 == 0){
       mage_4_die = loadTexture("./Mage_4/mage_4_morrendo_0.png");
   }else if(swap_texture_die_mage_4 == 1){
@@ -322,53 +373,8 @@ void mage_4_Die(){
   }
 
   swap_texture_die_mage_4++;
-  if(swap_texture_die_mage_4 != 5)
+  if(swap_texture_die_mage_4 < 4)
     glutTimerFunc(80,mage_4_Die,1);
-}
-
-void Mage_3_projetil_idle(){
-  setTextureUse_Mage(0,5);
-
-  if(swap_texture_projetil_idle_mage_3 == 0){
-      mage_3_projetil_idle = loadTexture("./Mage_3/mage_3_projetil_idle_0.png");
-  }else if(swap_texture_projetil_idle_mage_3 == 1){
-      mage_3_projetil_idle = loadTexture("./Mage_3/mage_3_projetil_idle_1.png");
-  }else if(swap_texture_projetil_idle_mage_3 == 2){
-      mage_3_projetil_idle = loadTexture("./Mage_3/mage_3_projetil_idle_2.png");
-  }else if(swap_texture_projetil_idle_mage_3 == 3){
-      mage_3_projetil_idle = loadTexture("./Mage_3/mage_3_projetil_idle_3.png");
-  }else if(swap_texture_projetil_idle_mage_3 == 4){
-      mage_3_projetil_idle = loadTexture("./Mage_3/mage_3_projetil_idle_4.png");
-  }else if(swap_texture_projetil_idle_mage_3 == 5){
-      mage_3_projetil_idle = loadTexture("./Mage_3/mage_3_projetil_idle_5.png");
-  }
-
-  swap_texture_projetil_idle_mage_3++;
-  if(swap_texture_projetil_idle_mage_3 == 5)
-    glutTimerFunc(10,Mage_3_projetil_idle,1);
-}
-
-void Mage_3_projetil_colision(){
-  setTextureUse_Mage(0,6);
-
-  if(swap_texture_projetil_colision_mage_3 == 0){
-      mage_3_projetil_colision = loadTexture("./Mage_3/mage_3_projetil_colision_1.png");
-  }else if(swap_texture_projetil_colision_mage_3 == 1){
-      mage_3_projetil_colision = loadTexture("./Mage_3/mage_3_projetil_colision_2.png");
-  }else if(swap_texture_projetil_colision_mage_3 == 2){
-      mage_3_projetil_colision = loadTexture("./Mage_3/mage_3_projetil_colision_3.png");
-  }else if(swap_texture_projetil_colision_mage_3 == 3){
-      mage_3_projetil_colision = loadTexture("./Mage_3/mage_3_projetil_colision_4.png");
-  }else if(swap_texture_projetil_colision_mage_3 == 4){
-      mage_3_projetil_colision = loadTexture("./Mage_3/mage_3_projetil_colision_5.png");
-  }else if(swap_texture_projetil_colision_mage_3 == 5){
-      mage_3_projetil_colision = loadTexture("./Mage_3/mage_3_projetil_colision_6.png");
-      ativa_projetil=0;
-  }
-
-  swap_texture_projetil_colision_mage_3++;
-  if(swap_texture_projetil_colision_mage_3 != 5)
-    glutTimerFunc(40,Mage_3_projetil_colision,1);
 }
 
 void Mage_4_projetil_idle(){
@@ -414,4 +420,58 @@ void Mage_4_projetil_colision(){
   swap_texture_projetil_colision_mage_4++;
   if(swap_texture_projetil_colision_mage_4 != 5)
     glutTimerFunc(80,Mage_4_projetil_colision,1);
+}
+
+
+void TimerFunc_1(int c){
+  if (c == 0) {
+
+      setTextureUse_Mage(0,0);
+      glutTimerFunc(0,mage_3_Idle,0);
+  }else if(c == 1){
+      setTextureUse_Mage(0,1);
+      glutTimerFunc(0,mage_3_Walk,0);
+  }else if(c == 2){
+      swap_texture_attack_mage_3=0;
+      setTextureUse_Mage(0,2);
+      glutTimerFunc(0,mage_3_Attack,0);
+  }else if(c == 3){
+      swap_texture_damage_mage_3 = 0;
+      setTextureUse_Mage(0,3);
+      glutTimerFunc(0,mage_3_Damage,0);
+  }else if(c == 4){
+      swap_texture_die_mage_3=0;
+      setTextureUse_Mage(0,4);
+      glutTimerFunc(0,mage_3_Die,0);
+  }else if (c == 5){
+      swap_texture_projetil_idle_mage_3=0;
+      setTextureUse_Mage(0,5);
+      glutTimerFunc(0,Mage_3_projetil_idle,0);
+  }else if (c == 6){
+      swap_texture_projetil_colision_mage_3 = 0;
+      setTextureUse_Mage(0,6);
+      glutTimerFunc(0,Mage_3_projetil_colision,0);
+  }
+}
+
+void TimerFunc_2(int c){
+  if (c == 0) {
+      glutTimerFunc(0,mage_4_Idle,0);
+  }else if(c == 1){
+      glutTimerFunc(0,mage_4_Walk,0);
+  }else if(c == 2){
+      swap_texture_attack_mage_4=0;
+      glutTimerFunc(0,mage_4_Attack,0);
+  }else if(c == 3){
+      swap_texture_damage_mage_4 = 0;
+      glutTimerFunc(0,mage_4_Damage,0);
+  }else if(c == 4){
+      setTextureUse_Mage(1,4);
+      glutTimerFunc(0,mage_4_Die,0);
+  }else if (c == 5){
+      glutTimerFunc(0,Mage_3_projetil_idle,0);
+  }else if (c == 6){
+      swap_texture_projetil_colision_mage_4 = 0;
+      glutTimerFunc(0,Mage_3_projetil_colision,0);
+  }
 }

@@ -15,7 +15,7 @@ extern int new_w=0;
 extern int new_h=0;
 extern int forca = 1;
 extern int ativa_projetil;
-extern Mix_Music *Intro;
+//extern Mix_Music *Intro;
 
 void inicializa(void)
 {
@@ -84,9 +84,9 @@ int main(int argc, char **argv) {
       glutInitWindowPosition(0,0);
       glutCreateWindow("JOGO");
 
-      SDL_Init (SDL_INIT_AUDIO);
+//      SDL_Init (SDL_INIT_AUDIO);
 
-      Mix_PlayMusic(Intro,-1);
+//      Mix_PlayMusic(Intro,-1);
       glutDisplayFunc(desenhaCena);
       glutReshapeFunc(redimensionada);
       glutKeyboardFunc(teclasPressionada);
@@ -98,7 +98,7 @@ int main(int argc, char **argv) {
 
       inittexture();
       inicializa();
-      atexit (SDL_Quit);
+//      atexit (SDL_Quit);
       glutMainLoop();
       return 0;
 }

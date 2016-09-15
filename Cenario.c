@@ -43,11 +43,11 @@ for (i = 0; i < NUMPREDIOS; i++) {
             glVertex3f(LARGURA/NUMPREDIOS+predio[i].cont-5,predio[i].y,0);
             glVertex3f(0+predio[i].cont,predio[i].y,0);
       glEnd();
-for (j = 0; j < ; j++) {
-  glColor3f()
+/*for (j = 0; j < ; j++) {
+  glColor3f(0)
 
 
-}
+}*/
       glColor3f(0.3, 0.3, 0.3);
       glBegin(GL_TRIANGLE_FAN);
      //          x  y  z

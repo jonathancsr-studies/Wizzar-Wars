@@ -1,2 +1,2 @@
-gcc main.c personagem.c Cenario.c projetil.c keyboard.c textura.c -o execut.exe -lSOIL -lGL -lglut -lGLEW -lm -lSDL
+gcc main.c personagem.c music.c Cenario.c projetil.c keyboard.c textura.c -o execut.exe -lSOIL -lGL -lglut -lGLEW -lm -lSDL
 

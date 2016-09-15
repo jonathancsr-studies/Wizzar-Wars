@@ -45,14 +45,12 @@ void lancaProjetil(){
           criaProjetil();
           A1.velocidade.x=cos(PI*A1.direcao/180)*(velocidade/5);
           A1.velocidade.y=sin(PI*A1.direcao/180)*(velocidade/5);
-          swap_texture_attack_mage_3=0;
-          glutTimerFunc(0,mage_3_Attack,0);
+          TimerFunc_1(2);
     }else{
           criaProjetil();
           A2.velocidade.x=(cos(PI*A2.direcao/180)*(velocidade/5))*(-1);
           A2.velocidade.y=sin(PI*A2.direcao/180)*(velocidade/5);
-          swap_texture_attack_mage_4=0;
-          glutTimerFunc(0,mage_4_Attack,0);
+          TimerFunc_2(2);
        }
 }
 void movimentoProjetil(){
@@ -98,8 +96,8 @@ int i;
                            ativo=0;
                            forca=1;
                            ativa_projetil=0;
-                           swap_texture_projetil_colision_mage_3 = 0;
-                           glutTimerFunc(0,Mage_3_projetil_colision,0);
+                           TimerFunc_1(6);
+
                      }
                }
          }else{
@@ -111,8 +109,7 @@ int i;
                            ativo=1;
                            forca=1;
                            ativa_projetil=0;
-                           swap_texture_projetil_colision_mage_3 = 0;
-                           glutTimerFunc(0,Mage_3_projetil_colision,0);
+                           TimerFunc_2(6);
                      }
                }
          }
@@ -127,11 +124,9 @@ int i;
                            timer=0;
                            forca=1;
                            //     ANIMAÇÃO DE TEXTURA
-                               swap_texture_damage_mage_4 = 0;
-                               glutTimerFunc(0,mage_4_Damage,0);
+                               TimerFunc_2(3);
                                printf("damage\n");
-                               swap_texture_projetil_colision_mage_3 = 0;
-                               glutTimerFunc(0,Mage_3_projetil_colision,0);
+                               TimerFunc_1(6);
                                puts("projetil");
                                p2.posicao[0]+=TRANSLADA;
                                A2.posicao.x+=TRANSLADA;
@@ -156,10 +151,8 @@ int i;
                            forca=1;
                            p1.vida--;
                            //    ANIMAÇÃO DE TEXTURA
-                               swap_texture_damage_mage_3 = 0;
-                               swap_texture_projetil_colision_mage_4 = 0;
-                               glutTimerFunc(0,mage_3_Damage,0);
-                               glutTimerFunc(0,Mage_4_projetil_colision,0);
+                               TimerFunc_1(3);
+                               TimerFunc_2(6);
                                p1.posicao[0]-=5*TRANSLADA;
                                A1.posicao.x-=5*TRANSLADA;
                                A1.posicao_inicial.x-=5*TRANSLADA;
@@ -176,9 +169,9 @@ int i;
       cheat=0;
    	if(p1.vida == 0||p2.vida == 0){
       if (p1.vida == 0) {
-        glutTimerFunc(0,mage_3_Die,0);
+        TimerFunc_1(4);
       }else if(p2.vida == 0){
-        glutTimerFunc(0,mage_4_Die,0);
+        TimerFunc_2(4);
       }
    	}
 }
