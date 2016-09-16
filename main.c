@@ -14,6 +14,7 @@ extern int cheat=0;
 extern int new_w=0;
 extern int new_h=0;
 extern int forca = 1;
+extern int vento;
 extern int ativa_projetil;
 //extern Mix_Music *Intro;
 
@@ -27,6 +28,7 @@ void inicializa(void)
     glClearColor(0, 0, 0, 0);
     glutTimerFunc(50,mage_4_Idle,0);
     glutTimerFunc(50,mage_3_Idle,0);
+    criaVento();
     glutPostRedisplay();
 
 }

@@ -9,6 +9,7 @@ PROJETIL A1,A2;
 ASTRO Sol;
 int varia=0;
 int forca;
+int vento;
 PREDIOS mapa [NUMPREDIOS];
 
 void reiniciaJogo(void){
@@ -174,34 +175,18 @@ void barraForca(){
       }
 }
 
-void vento(){
+void criaVento(){
       srand(time(0));
-      int i,f_vento,l_vento;
-      // d=0 esquerda d=1 direita
+      int f_vento;
 
-      f_vento=rand()%100;
-      l_vento=rand()%10;
+      f_vento = rand()%5;
 
-      if(l_vento >= 0 && l_vento <= 5)
-         l_vento=0;
-      else
-         l_vento=1;
-
-      if(l_vento == 0)
-         printf("Vento para <<<\nvelocidade = %d\n",f_vento);
-      if(l_vento == 1)
-         printf("Vento para >>>\nvelocidade = %d\n",f_vento);
-
-      if(ativo)
-      {
-         if(l_vento==0)
-              A1.velocidade.x-=f_vento;
-         else if(l_vento==1)
-              A1.velocidade.x+=f_vento;
+      if(f_vento>2){
+      vento = f_vento*(-1);
       }else{
-         if(l_vento==0)
-              A2.velocidade.x+=f_vento;
-         else if(l_vento==1)
-              A2.velocidade.x-=f_vento;
+      vento = f_vento;
       }
+
+      printf("vento === %d\n",vento );
+
 }

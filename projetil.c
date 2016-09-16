@@ -9,6 +9,7 @@ int ativo;
 int timer;
 int cheat;
 int pause;
+int vento;
 int forca;
 int ativa_projetil;
 extern int swap_texture_damage_mage_3;
@@ -61,14 +62,16 @@ int i;
           A1.posicao.x+=A1.velocidade.x;
           A1.posicao.y+=A1.velocidade.y;
           A1.velocidade.y-=gravidade;
+          A1.velocidade.x+=vento/165.1;
     }else{
           A2.posicao.x+=A2.velocidade.x;
           A2.posicao.y+=A2.velocidade.y;
           A2.velocidade.y-=gravidade;
+          A2.velocidade.x+=vento/165.1;
    }
    //SE SAIR DA TELA
 
-   if(A1.posicao.x >= LARGURA||A2.posicao.x+LARGURAPROJETIL <= 0)
+   if(A1.posicao.x >= LARGURA||A2.posicao.x+LARGURAPROJETIL <= 0 || A2.posicao.x >= LARGURA || A1.posicao.x <= 0 )
          {
                A1.posicao.x=A1.posicao_inicial.x;
                A1.posicao.y=A1.posicao_inicial.y;
@@ -78,7 +81,7 @@ int i;
                forca=1;
                if(ativo){
                ativo=0;
-
+      criaVento();
                ativa_projetil=0;
                }else{
                      ativo=1;
@@ -97,7 +100,7 @@ int i;
                            forca=1;
                            ativa_projetil=0;
                            TimerFunc_1(6);
-
+                                 criaVento();
                      }
                }
          }else{
@@ -110,6 +113,7 @@ int i;
                            forca=1;
                            ativa_projetil=0;
                            TimerFunc_2(6);
+                                 criaVento();
                      }
                }
          }
@@ -123,6 +127,7 @@ int i;
                            p2.vida--;
                            timer=0;
                            forca=1;
+                        criaVento();
                            //     ANIMAÇÃO DE TEXTURA
                                TimerFunc_2(3);
                                printf("damage\n");
@@ -156,7 +161,7 @@ int i;
                                p1.posicao[0]-=5*TRANSLADA;
                                A1.posicao.x-=5*TRANSLADA;
                                A1.posicao_inicial.x-=5*TRANSLADA;
-
+                               criaVento();
                            //    FIM DA ANIMAÇÃO DE TEXTURA
                            if(ativo){
                                 ativo=0;
@@ -237,6 +242,9 @@ if(cheat){
                	x+=velocidade_x;
                	y+=velocidade_y;
                	velocidade_y-=gravidade;
+                  velocidade_x+=vento/165.1;
+
+
                   if(v){
                         break;
                   }
