@@ -7,65 +7,139 @@ int pot;
 int cheat;
 int pause;
 int forca;
+int menu;
+int i;
 extern int TimerFunc_1_constant,TimerFunc_2_constant;
 extern int ativa_projetil;
+extern int texture_set_menu;
 
 void teclasPressionada(unsigned char key, int x, int y){
+unsigned char aux;
+aux = key;
   switch (key) {
     case 27:
-      exit(0);
-      break;
+            if(menu != 0 && menu != 1 && menu != 2 && menu != 3 && menu!=4){
+                texture_set_menu = 6;
+                if(menu != 8 && menu != 7)
+                {
+                  menu = 6;
+                }
+                pause = 0;
+            }
+            if(menu == 4)
+            {
+              menu=0;
+              texture_set_menu = 0;
+            }
+            break;
      case 'C':
      case 'c':
-     if(timer==0){
-     if(cheat){
-           cheat=0;
-     }else{
-           cheat=1;
-      }
-     }
-      break;
+             if(timer==0){
+             if(cheat){
+                   cheat=0;
+             }else{
+                   cheat=1;
+              }
+             }
+              break;
      case 'p':
      case 'P':
-     if(pause){
-           pause=0;
-     }else{
-           pause=1;
-     }
+
+             if(menu != 0 && menu != 1 && menu != 2 && menu != 3){
+                   pause=0;
+                   menu = 5;
+             }else if(menu == 5){
+                   pause=1;
+             }
      break;
      case' ':
-     if(forca==0)
-     if(timer==0){
-       ativa_projetil=1;
-       lancaProjetil();
-       timer=1;
-      }
-        break;
+             if(forca==0)
+             if(timer==0){
+               ativa_projetil=1;
+               TimerFunc_1_constant = 2;
+               lancaProjetil();
+               timer=1;
+              }
+                break;
       case 70:
-     glutFullScreen();
-     break;
-     case 13:
-     if(forca){
-          forca=0;
-     }else{
-          forca=1;
-     }
-     break;
+              glutFullScreen();
+              break;
+     case 13:if(menu==1 || menu ==2 || menu ==3){
+                if(menu == 1){
+                  menu = 5;
+                  pause = 1;
+                    barraForca();
+                }else if(menu == 2){
+                  menu = 4;
+                  texture_set_menu = 4;
+                }else if(menu == 3){
+                  exit(0);
+                }
+             }else{
+               printf("ok\n");
+                if(forca){
+                  forca=0;
+                }else{
+                  forca=1;
+                }
+           }
+             break;
+     case 'n':
+     case 'N':if(menu == 7 || menu == 8)
+              {
+                if(menu == 7)
+                    texture_set_menu = 7;
+                else if(menu == 8)
+                    texture_set_menu = 8;
+              }else if(menu == 6)
+              {
+                    pause = 1;
+                    break;
+              }else if(menu == 9){
+                pause = 1;
+              }
+              break;
      case 'r':
      case 'R':
-     reiniciaJogo();
+             if(menu != 0 && menu != 1 && menu != 2 && menu != 3){
+                  if(menu == 7 || menu ==8){
+                    reiniciaJogo();
+                    pause = 0;
+                  }else{
+                    texture_set_menu = 9;
+                    menu = 9;
+                    pause = 0;
+                  }
+              }
+              break;
+     case 's':
+     case 'S':
+                if(menu == 6){
+                  menu = 0;
+                  texture_set_menu = 0;
+                break;
+              }else if(menu == 9)
+              {
+                pause = 1;
+                reiniciaJogo();
+
+              }
+
+
      break;
+
+
      default:
      break;
   }
   glutPostRedisplay();
 }
 
-void setasPressionadas(unsigned char key, int x, int y){
-if(pause)
-  if(timer==0){
-  switch (key) {
-    case GLUT_KEY_RIGHT:
+void setasPressionadas(int key_special, int x, int y){
+
+  switch (key_special) {
+if(timer==0){
+      case GLUT_KEY_RIGHT:
         if(ativo){
             if(p1.posicao[0]<(LARGURA/NUMPREDIOS)-LARGURAPERSONAGEM){
                 p1.posicao[0]+=TRANSLADA;
@@ -108,25 +182,54 @@ if(pause)
       }
       break;
       case GLUT_KEY_UP:
-      if(ativo){
-            if(A1.direcao < 90)
-             A1.direcao++;
-      }
-      else
-            if(A1.direcao < 90)
-             A2.direcao++;
+      if(menu != 0 && menu != 1 && menu != 2 && menu != 3){
+            if(ativo){
+                  if(A1.direcao < 90)
+                   A1.direcao++;
+            }
+            else
+                  if(A1.direcao < 90)
+                   A2.direcao++;
+      }else if(menu <=3){
+          if(menu == 0)
+          {
+             menu = 1;
+          }else if(menu == 1){
+            menu = 3;
+          }else{
+            menu--;
+          }
+       texture_set_menu = menu;
+     }
+
+
       break;
       case GLUT_KEY_DOWN:
-      if(ativo){
-          if(A1.direcao > 0)
-             A1.direcao--;
-      }
-      else
-      if(A2.direcao > 0)
-             A2.direcao--;
+        if(menu != 0 && menu != 1 && menu != 2 && menu != 3){
+          if(ativo){
+              if(A1.direcao > 0)
+                 A1.direcao--;
+          }
+          else
+          if(A2.direcao > 0)
+                 A2.direcao--;
+        }else if(menu <=3){
+            if(menu == 0)
+            {
+               menu = 1;
+            }else if(menu == 3){
+              menu = 1;
+            }else{
+              menu++;
+            }
+         texture_set_menu = menu;
+       }
+
       break;
      default:
+
+               glutPostRedisplay();
         break;
   }
- }
+}
 }

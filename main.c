@@ -8,7 +8,7 @@ extern PERSONAGEM p1,p2;
 extern int timer;
 extern double gravidade= 0.1;
 extern int pot;
-extern int pause=1;
+extern int pause=0;
 extern ASTRO Sol;
 extern int cheat=0;
 extern int new_w=0;
@@ -16,6 +16,8 @@ extern int new_h=0;
 extern int forca = 1;
 extern int ativa_projetil;
 extern int vento;
+extern int menu = 0;
+extern int texture_set_menu = 0;
 //extern Mix_Music *Intro;
 
 void inicializa(void)

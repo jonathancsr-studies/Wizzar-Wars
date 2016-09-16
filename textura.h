@@ -8,7 +8,7 @@ GLuint menu_texture,menu_hover,fundo,lua,vento_texture;
 int TimerFunc_1_constant_projetil,TimerFunc_1_constant;
 int TimerFunc_2_constant_projetil,TimerFunc_2_constant;
 
-int texture_set_1,texture_set_2,texture_set_1_projetil,texture_set_2_projetil;
+int texture_set_menu,texture_set_1,texture_set_2,texture_set_1_projetil,texture_set_2_projetil;
 
 unsigned int loadTexture(char nometextura[]);
 

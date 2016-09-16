@@ -105,9 +105,6 @@ void planodeFundo(){
       criarRetangulo(LARGURA,ALTURA,fundo);
 }
 
-void Timer(){
-}
-
 void JogoRoda(){
 if(pause){
       if(timer)
@@ -132,8 +129,8 @@ if(pause){
 void telaPause(){
 
       if(pause==0){
-      glColor3f(0,1,0);
-      criarRetangulo(LARGURA,ALTURA,pause);
+      carrega_textura_menu (0);
+      criarRetangulo(LARGURA,ALTURA,menu_texture);
       }
 }
 

@@ -50,6 +50,7 @@ void TimerFunc_1(){
       texture_set_1 = 0;
       mage_3_Die();
   }
+  //glutTimerFunc(60,TimerFunc_1,1);
 }
 
 void TimerFunc_1_Projetil(){
@@ -60,6 +61,7 @@ void TimerFunc_1_Projetil(){
       texture_set_1_projetil = 0;
       Mage_3_projetil_colision();
   }
+//    glutTimerFunc(60,TimerFunc_1_Projetil,1);
 }
 
 void TimerFunc_2(){
@@ -79,6 +81,7 @@ void TimerFunc_2(){
     texture_set_2 = 0;
     mage_4_Die();
   }
+  //  glutTimerFunc(60,TimerFunc_2,1);
 }
 
 void TimerFunc_2_Projetil(){
@@ -89,26 +92,27 @@ void TimerFunc_2_Projetil(){
       texture_set_2_projetil = 0;
       Mage_4_projetil_colision();
   }
+    //glutTimerFunc(60,TimerFunc_2_Projetil,1);
 }
 
 void mage_3_Idle(){
             if(texture_set_1 == 0){
         		mage_3 = loadTexture("./Mage_3/mage_3_Idle_0.png");
-          }else if(texture_set_1 == 10){
+          }else if(texture_set_1 == 1){
         		mage_3 = loadTexture("./Mage_3/mage_3_Idle_1.png");
-          }else if(texture_set_1 == 20){
+          }else if(texture_set_1 == 2){
         		mage_3 = loadTexture("./Mage_3/mage_3_Idle_2.png");
-        	}else if(texture_set_1 == 30){
+        	}else if(texture_set_1 == 3){
         		mage_3 = loadTexture("./Mage_3/mage_3_Idle_3.png");
-          }else if(texture_set_1 == 40){
+          }else if(texture_set_1 == 4){
         		mage_3 = loadTexture("./Mage_3/mage_3_Idle_4.png");
-          }else if(texture_set_1 == 50){
+          }else if(texture_set_1 == 5){
                 mage_3 = loadTexture("./Mage_3/mage_3_Idle_5.png");
           }
           texture_set_1++;
-        if(texture_set_1 >= 50)
+        if(texture_set_1 >= 5)
             texture_set_1 =0;
-        glutTimerFunc(500,mage_3_Idle,1);
+        glutTimerFunc(400,mage_3_Idle,1);
 }
 
 void mage_3_Walk(){
@@ -142,38 +146,38 @@ void mage_3_Attack(){
       }else if(texture_set_1 == 1){
           mage_3 = loadTexture("./Mage_3/mage_3_Atack_1.png");
       }else if(texture_set_1 == 2){
-        printf("3\n");  mage_3 = loadTexture("./Mage_3/mage_3_Atack_2.png");
+          mage_3 = loadTexture("./Mage_3/mage_3_Atack_2.png");
       }else if(texture_set_1 == 3){
-          printf("4\n");mage_3 = loadTexture("./Mage_3/mage_3_Atack_3.png");
+          ;mage_3 = loadTexture("./Mage_3/mage_3_Atack_3.png");
       }else if(texture_set_1 == 4){
-          printf("5\n");mage_3 = loadTexture("./Mage_3/mage_3_Atack_4.png");
+          mage_3 = loadTexture("./Mage_3/mage_3_Atack_4.png");
       }else if(texture_set_1 == 5){
-          printf("6\n");mage_3 = loadTexture("./Mage_3/mage_3_Atack_5.png");
+          mage_3 = loadTexture("./Mage_3/mage_3_Atack_5.png");
       }else if(texture_set_1 == 6){
-          printf("7\n");mage_3 = loadTexture("./Mage_3/mage_3_Atack_6.png");
+          mage_3 = loadTexture("./Mage_3/mage_3_Atack_6.png");
           TimerFunc_1_constant = 0;
       }
       texture_set_1++;
-      if(texture_set_1 != 6)
-        glutTimerFunc(80,TimerFunc_1,1);
 }
 
 void mage_3_Damage(){
+
   if(texture_set_1 ==0){
-    printf("1\n");mage_3 = loadTexture("./Mage_3/mage_3_Damage_0.png");
+    mage_3 = loadTexture("./Mage_3/mage_3_Damage_0.png");
   }else if(texture_set_1 == 1){
-    printf("2\n");mage_3 = loadTexture("./Mage_3/mage_3_Damage_1.png");
+    mage_3 = loadTexture("./Mage_3/mage_3_Damage_1.png");
   }else if(texture_set_1 == 2){
-    printf("3\n");mage_3 = loadTexture("./Mage_3/mage_3_Damage_2.png");
+    mage_3 = loadTexture("./Mage_3/mage_3_Damage_2.png");
   }else if(texture_set_1 == 3){
-    printf("4\n");mage_3 = loadTexture("./Mage_3/mage_3_Damage_3.png");
+    mage_3 = loadTexture("./Mage_3/mage_3_Damage_3.png");
   }else if(texture_set_1 == 4){
-    printf("5\n");mage_3 = loadTexture("./Mage_3/mage_3_Damage_4.png");
+    mage_3 = loadTexture("./Mage_3/mage_3_Damage_4.png");
     TimerFunc_1_constant = 0;
   }
   texture_set_1++;
-  if(texture_set_1 != 5)
-    glutTimerFunc(80,TimerFunc_1,1);
+  if(texture_set_1 >= 5)
+    texture_set_1 = 0;
+    glutTimerFunc(80,mage_3_Damage,1);
 }
 
 void mage_3_Die(){
@@ -193,8 +197,6 @@ void mage_3_Die(){
     }
     if(texture_set_1 != 5)
       texture_set_1++;
-    if(texture_set_1 <= 5)
-      glutTimerFunc(80,TimerFunc_1,1);
 }
 
 void Mage_3_projetil_idle(){
@@ -211,11 +213,11 @@ void Mage_3_projetil_idle(){
       mage_3_projetil = loadTexture("./Mage_3/mage_3_projetil_idle_4.png");
   }else if(texture_set_1_projetil == 5){
       mage_3_projetil = loadTexture("./Mage_3/mage_3_projetil_idle_5.png");
-      texture_set_1_projetil=-1;
   }
-
   texture_set_1_projetil++;
-  glutTimerFunc(10,TimerFunc_1_Projetil,1);
+  if(texture_set_1_projetil >= 5)
+      texture_set_1_projetil = 0;
+  glutTimerFunc(80,Mage_3_projetil_idle,1);
 }
 
 void Mage_3_projetil_colision(){
@@ -235,7 +237,6 @@ void Mage_3_projetil_colision(){
   }
 
   texture_set_1_projetil++;
-  glutTimerFunc(40,TimerFunc_1_Projetil,1);
 }
 
 void mage_4_Idle(){
@@ -247,7 +248,7 @@ void mage_4_Idle(){
   texture_set_2++;
   if(texture_set_2 >= 1)
       texture_set_2 = 0;
-  glutTimerFunc(500,TimerFunc_2,1);
+  glutTimerFunc(80,mage_4_Idle,1);
 }
 
 void mage_4_Walk(){
@@ -338,12 +339,12 @@ void Mage_4_projetil_idle(){
       mage_4_projetil = loadTexture("./Mage_4/mage_4_projetil_idle_4.png");
   }else if(texture_set_2_projetil == 5){
       mage_4_projetil = loadTexture("./Mage_4/mage_4_projetil_idle_5.png");
-      texture_set_2 = -1;
   }
 
   texture_set_2_projetil++;
-  if(texture_set_2_projetil <= 5)
-    glutTimerFunc(80,TimerFunc_2_Projetil,1);
+  if(texture_set_2_projetil >= 5)
+    texture_set_2_projetil = 0;
+    glutTimerFunc(80,Mage_4_projetil_idle,1);
 }
 
 void Mage_4_projetil_colision(){
@@ -371,20 +372,29 @@ void Mage_4_projetil_colision(){
 
 
 
-void carrega_textura_menu(int k){
-  if(k == 0){
+void carrega_textura_menu(){
+  if(texture_set_menu == 0){
     menu_texture= loadTexture("./menus/menu.png");
-  }else if(k == 1){
+  }else if(texture_set_menu == 1){
     menu_texture = loadTexture("./menus/menu_WWITC_hover_jogar.png");
-  }else if(k == 2){
+  }else if(texture_set_menu == 2){
       menu_texture = loadTexture("./menus/menu_WWITC_hover_creditos.png");
-  }else if(k == 3){
+  }else if(texture_set_menu == 3){
       menu_texture = loadTexture("./menus/menu_WWITC_hover_Sair.png");
-  }else if(k == 4){
+  }else if(texture_set_menu == 4){
       menu_texture = loadTexture("./menus/creditos.png");
-  }else if (k == 5) {
+  }else if (texture_set_menu == 5) {
     menu_texture = loadTexture("./menus/menu_pause.png");
+  }else if(texture_set_menu == 6){
+    menu_texture = loadTexture("./menus/menu_sair.png");
+  }else if(texture_set_menu == 7){
+    menu_texture = loadTexture("./menus/ganhou_1.png");
+  }else if(texture_set_menu == 8){
+    menu_texture = loadTexture("./menus/ganhou_2.png");
+  }else if(texture_set_menu == 9){
+    menu_texture = loadTexture("./menus/ganhou_2.png");
   }
+
 }
 
 void textura_vento(int vento){
@@ -410,25 +420,25 @@ void textura_vento(int vento){
         vento_texture = loadTexture("./util/vento_esquerda_3");
       }
   }else{
-    if(vento == 0)
-    {
-      vento_texture = loadTexture("./util/vento_sem_01.png");
-    }else if(vento == -1)
-    {
-      vento_texture = loadTexture("./util/vento_direita_1");
-    }else if(vento == -2)
-    {
-      vento_texture = loadTexture("./util/vento_direita_2");
-    }else if(vento >= -3 )
-    {
-      vento_texture = loadTexture("./util/vento_direita_3");
-    }else if (vento == 1) {
-      vento_texture = loadTexture("./util/vento_esquerda_1");
-    }else if (vento == 2) {
-      vento_texture = loadTexture("./util/vento_esquerda_2");
-    }else if (vento <= 3) {
-      vento_texture = loadTexture("./util/vento_esquerda_3");
-    }
+      if(vento == 0)
+      {
+        vento_texture = loadTexture("./util/vento_sem_01.png");
+      }else if(vento == -1)
+      {
+        vento_texture = loadTexture("./util/vento_direita_1");
+      }else if(vento == -2)
+      {
+        vento_texture = loadTexture("./util/vento_direita_2");
+      }else if(vento >= -3 )
+      {
+        vento_texture = loadTexture("./util/vento_direita_3");
+      }else if (vento == 1) {
+        vento_texture = loadTexture("./util/vento_esquerda_1");
+      }else if (vento == 2) {
+        vento_texture = loadTexture("./util/vento_esquerda_2");
+      }else if (vento <= 3) {
+        vento_texture = loadTexture("./util/vento_esquerda_3");
+      }
   }
 
 }

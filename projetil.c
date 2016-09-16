@@ -12,7 +12,7 @@ int pause;
 int vento;
 int forca;
 int ativa_projetil;
-extern int texture_set_1_projetil,texture_set_2_projetil;
+extern int texture_set_1_projetil,texture_set_2_projetil,texture_set_menu,menu;
 
 PREDIOS mapa[NUMPREDIOS];
 
@@ -75,13 +75,13 @@ int i;
                timer=0;
                forca=1;
                if(ativo){
-               ativo=0;
-               criaVento();
-               ativa_projetil=0;
+                 ativo=0;
+                 criaVento();
+                 ativa_projetil=0;
                }else{
-                     ativo=1;
-                //     ativa_projetil=0;
-                }
+                 ativo=1;
+                 ativa_projetil=0;
+               }
          }
 // SE ACERTAR UM DOS PREDIOS
  for(i=0;i<NUMPREDIOS;i++){
@@ -174,8 +174,14 @@ int i;
    	if(p1.vida == 0||p2.vida == 0){
       if (p1.vida == 0) {
         TimerFunc_1_constant = 4;
+        texture_set_menu = 8;
+        pause = 0;
+        menu = 8;
       }else if(p2.vida == 0){
-        TimerFunc_1_constant = 4;
+        TimerFunc_2_constant = 4;
+        texture_set_menu = 7;
+        pause = 0;
+        menu = 7;
       }
    	}
 }
@@ -184,10 +190,10 @@ void criaProjetil(){
 
       glPushMatrix();
             if(ativo){
-            glTranslatef(A1.posicao.x,A1.posicao.y,0);
+            glTranslatef(A1.posicao.x,A1.posicao.y-10,0);
             criarProjetil(LARGURAPROJETIL,ALTURAPROJETIL,0);
       }else{
-            glTranslatef(A2.posicao.x,A2.posicao.y,0);
+            glTranslatef(A2.posicao.x,A2.posicao.y-20,0);
             criarProjetil(LARGURAPROJETIL,ALTURAPROJETIL,1);
       };
       glPopMatrix();
