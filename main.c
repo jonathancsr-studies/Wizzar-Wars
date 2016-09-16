@@ -14,21 +14,20 @@ extern int cheat=0;
 extern int new_w=0;
 extern int new_h=0;
 extern int forca = 1;
-extern int vento;
 extern int ativa_projetil;
+extern int vento;
 //extern Mix_Music *Intro;
 
 void inicializa(void)
 {
     ativo = 1;
     gerarMapa(mapa);
+    criaVento();
     inicializa_personagem();
     inicializa_Projetil();
     iniciaAstro();
     glClearColor(0, 0, 0, 0);
-    glutTimerFunc(50,mage_4_Idle,0);
-    glutTimerFunc(50,mage_3_Idle,0);
-    criaVento();
+    inittexture();
     glutPostRedisplay();
 
 }
@@ -68,6 +67,7 @@ void desenhaCena(){
     criaProjetil();
   geraTrajetoria();
   barraForca();
+  desenha_Vento();
   geraAngulo();
   glutSwapBuffers();
 }
@@ -96,9 +96,10 @@ int main(int argc, char **argv) {
       glutIdleFunc(Idle);
 //      glutMouseFunc(mouse);
       glutTimerFunc(0,JogoRoda,0);
-
-
-      inittexture();
+      glutTimerFunc(0,TimerFunc_1,0);
+      glutTimerFunc(0,TimerFunc_2,0);
+      glutTimerFunc(0,TimerFunc_1_Projetil,0);
+      glutTimerFunc(0,TimerFunc_2_Projetil,0);
       inicializa();
 //      atexit (SDL_Quit);
       glutMainLoop();

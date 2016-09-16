@@ -7,8 +7,7 @@ int pot;
 int cheat;
 int pause;
 int forca;
-extern int swap_texture_attack_mage_3;
-extern int swap_texture_attack_mage_4;
+extern int TimerFunc_1_constant,TimerFunc_2_constant;
 extern int ativa_projetil;
 
 void teclasPressionada(unsigned char key, int x, int y){
@@ -72,14 +71,18 @@ if(pause)
                 p1.posicao[0]+=TRANSLADA;
                 A1.posicao.x+=TRANSLADA;
                 A1.posicao_inicial.x+=TRANSLADA;
+                TimerFunc_1_constant = 1;
                 mage_3_Walk();
+                TimerFunc_1_constant = 0;
         }
  }else{
             if(p2.posicao[0]<LARGURA-LARGURAPERSONAGEM){
                 p2.posicao[0]+=TRANSLADA;
                 A2.posicao.x+=TRANSLADA;
                 A2.posicao_inicial.x+=TRANSLADA;
+                TimerFunc_1_constant = 1;
                 mage_4_Walk();
+                TimerFunc_1_constant = 0;
             }
       }
       break;
@@ -89,14 +92,18 @@ if(pause)
                 p1.posicao[0]-=TRANSLADA;
                 A1.posicao.x-=TRANSLADA;
                 A1.posicao_inicial.x-=TRANSLADA;
-                mage_3_Walk_2();
+                TimerFunc_1_constant = 1;
+                mage_3_Walk();
+                TimerFunc_1_constant = 0;
         }
             }else{
             if(p2.posicao[0]>(LARGURA - (LARGURA/NUMPREDIOS))){
                 p2.posicao[0]-=TRANSLADA;
                 A2.posicao.x-=TRANSLADA;
                 A2.posicao_inicial.x-=TRANSLADA;
+                TimerFunc_1_constant = 1;
                 mage_4_Walk();
+                TimerFunc_1_constant = 0;
             }
       }
       break;

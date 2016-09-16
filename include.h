@@ -28,10 +28,8 @@
 #define PI 3.14
 #define ALTURAPROJETIL 40
 #define LARGURAPROJETIL 20
-#define ALTURASOL 75
-#define LARGURASOL 30
+#define ALTURASOL 120
+#define LARGURASOL 40
 #define NUMPREDIOS 12
-
-
 
 #endif

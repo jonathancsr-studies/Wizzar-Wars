@@ -1,8 +1,6 @@
 #include "include.h"
 PERSONAGEM p1,p2;
 extern PREDIOS mapa[NUMPREDIOS];
-extern unsigned int textureuse_mage3;
-extern unsigned int textureuse_mage4;
 
 void geradorDePersonagem(double largura, double altura,int k){
 
@@ -29,9 +27,9 @@ void movimentoPersonagem(float x,float y,int k){
             glColor3f (1, 1, 1);
             glEnable(GL_TEXTURE_2D);
             if(k == 0)
-              glBindTexture(GL_TEXTURE_2D, textureuse_mage3);
+              glBindTexture(GL_TEXTURE_2D, mage_3);
             else if(k == 1)
-              glBindTexture(GL_TEXTURE_2D, textureuse_mage4);
+              glBindTexture(GL_TEXTURE_2D, mage_4);
               geradorDePersonagem(LARGURAPERSONAGEM,ALTURAPERSONAGEM,k);
             glDisable(GL_TEXTURE_2D);
       glPopMatrix();

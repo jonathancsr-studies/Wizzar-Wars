@@ -11,6 +11,7 @@ int varia=0;
 int forca;
 int vento;
 PREDIOS mapa [NUMPREDIOS];
+extern GLuint fundo,lua,vento_texture;
 
 void reiniciaJogo(void){
     ativo = 1;
@@ -22,13 +23,20 @@ void reiniciaJogo(void){
     glutPostRedisplay();
 }
 
-void criarRetangulo(double largura, double altura){
+void criarRetangulo(double largura, double altura,unsigned int texture){
+
+  if(texture != 0){
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texture);
+   }
   glBegin(GL_TRIANGLE_FAN);
-    glVertex3f(0,0,0);
-    glVertex3f(largura,0,0);
-    glVertex3f(largura,altura,0);
-    glVertex3f(0,altura,0);
+    glTexCoord2f(0.0, 0.0); glVertex3f(0,0,0);
+    glTexCoord2f(1.0, 0.0); glVertex3f(largura,0,0);
+    glTexCoord2f(1.0, 1.0); glVertex3f(largura,altura,0);
+    glTexCoord2f(0.0, 1.0); glVertex3f(0,altura,0);
   glEnd();
+  if(texture != 0)
+    glDisable(GL_TEXTURE_2D);
 }
 
 void desenhaCenaInicialJogo(PREDIOS predio[]){
@@ -57,11 +65,6 @@ for (i = 0; i < NUMPREDIOS; i++) {
             glVertex3f(LARGURA/NUMPREDIOS+predio[i].cont,predio[i].y-10,0);
             glVertex3f(0+predio[i].cont+55,predio[i].y,0);
       glEnd();
-
-
-
-
-
       }
 }
 
@@ -99,10 +102,7 @@ void gerarMapa(PREDIOS* predio) {
 void planodeFundo(){
   glClear(GL_COLOR_BUFFER_BIT);
       glColor3f(0,0,0.3);
-//  glEnable(GL_TEXTURE_2D);
-//  glBindTexture(GL_TEXTURE_2D, texturaMario);
-      criarRetangulo(LARGURA,ALTURA);
-//  glDisable(GL_TEXTURE_2D);
+      criarRetangulo(LARGURA,ALTURA,fundo);
 }
 
 void Timer(){
@@ -133,7 +133,7 @@ void telaPause(){
 
       if(pause==0){
       glColor3f(0,1,0);
-      criarRetangulo(LARGURA,ALTURA);
+      criarRetangulo(LARGURA,ALTURA,pause);
       }
 }
 
@@ -151,7 +151,7 @@ void criaAstro(){
 
       glPushMatrix();
       glTranslatef(Sol.posicao.x,Sol.posicao.y,0);
-      criarRetangulo(LARGURASOL,ALTURASOL);
+      criarRetangulo(LARGURASOL,ALTURASOL,lua);
       glPopMatrix();
 }
 
@@ -175,6 +175,31 @@ void barraForca(){
       }
 }
 
+void vento_func(){
+      srand(time(0));
+      int i,f_vento,l_vento;
+      // d=0 esquerda d=1 direita
+
+      f_vento=rand()%100;
+      l_vento=rand()%10;
+
+      if(l_vento >= 0 && l_vento <= 5)
+         l_vento=0;
+      else
+         l_vento=1;
+      if(ativo)
+      {
+         if(l_vento==0)
+              A1.velocidade.x-=f_vento;
+         else if(l_vento==1)
+              A1.velocidade.x+=f_vento;
+      }else{
+         if(l_vento==0)
+              A2.velocidade.x+=f_vento;
+         else if(l_vento==1)
+              A2.velocidade.x-=f_vento;
+      }
+}
 void criaVento(){
       srand(time(0));
       int f_vento;
@@ -186,7 +211,15 @@ void criaVento(){
       }else{
       vento = f_vento;
       }
-
       printf("vento === %d\n",vento );
 
+}
+void desenha_Vento(){
+  /*textura_vento(vento);
+  glPushMatrix();
+    glTranslatef(LARGURA/2-120,800,0);
+    glColor3f(1,1,1);
+    criarRetangulo(300,300,vento);
+  glPopMatrix();
+*/
 }

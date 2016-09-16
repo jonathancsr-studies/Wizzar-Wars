@@ -12,14 +12,8 @@ int pause;
 int vento;
 int forca;
 int ativa_projetil;
-extern int swap_texture_damage_mage_3;
-extern int swap_texture_damage_mage_4;
-extern int swap_texture_attack_mage_3;
-extern int swap_texture_attack_mage_4;
-extern int swap_texture_projetil_colision_mage_3;
-extern int swap_texture_projetil_colision_mage_4;
-extern unsigned int textureuse_mage3_projetil;
-extern unsigned int textureuse_mage4_projetil;
+extern int texture_set_1_projetil,texture_set_2_projetil;
+
 PREDIOS mapa[NUMPREDIOS];
 
 
@@ -28,9 +22,9 @@ void criarProjetil(double largura, double altura,int k){
   glColor3f (1, 1, 1);
   glEnable(GL_TEXTURE_2D);
   if(k == 0)
-    glBindTexture(GL_TEXTURE_2D, textureuse_mage3_projetil);
+    glBindTexture(GL_TEXTURE_2D, mage_3_projetil);
   else if(k == 1)
-    glBindTexture(GL_TEXTURE_2D, textureuse_mage4_projetil);
+    glBindTexture(GL_TEXTURE_2D, mage_4_projetil);
   glBegin(GL_TRIANGLE_FAN);
       glTexCoord2f(0.0, 0.0); glVertex3f(       0,       0,  0);
       glTexCoord2f(1.0, 0.0); glVertex3f( largura,       0,  0);
@@ -43,15 +37,16 @@ void criarProjetil(double largura, double altura,int k){
 
 void lancaProjetil(){
       if(ativo){
+          TimerFunc_1_constant_projetil = 0;
           criaProjetil();
           A1.velocidade.x=cos(PI*A1.direcao/180)*(velocidade/5);
           A1.velocidade.y=sin(PI*A1.direcao/180)*(velocidade/5);
-          TimerFunc_1(2);
     }else{
+          TimerFunc_2_constant_projetil = 0;
           criaProjetil();
           A2.velocidade.x=(cos(PI*A2.direcao/180)*(velocidade/5))*(-1);
           A2.velocidade.y=sin(PI*A2.direcao/180)*(velocidade/5);
-          TimerFunc_2(2);
+
        }
 }
 void movimentoProjetil(){
@@ -81,7 +76,7 @@ int i;
                forca=1;
                if(ativo){
                ativo=0;
-      criaVento();
+               criaVento();
                ativa_projetil=0;
                }else{
                      ativo=1;
@@ -98,9 +93,9 @@ int i;
                            timer=0;
                            ativo=0;
                            forca=1;
-                           ativa_projetil=0;
-                           TimerFunc_1(6);
-                                 criaVento();
+                           TimerFunc_1_constant_projetil = 1;
+                           ativa_projetil = 0;
+                           criaVento();
                      }
                }
          }else{
@@ -111,9 +106,9 @@ int i;
                            timer=0;
                            ativo=1;
                            forca=1;
-                           ativa_projetil=0;
-                           TimerFunc_2(6);
-                                 criaVento();
+                           TimerFunc_2_constant_projetil = 1;
+                           ativa_projetil = 0;
+                           criaVento();
                      }
                }
          }
@@ -127,11 +122,11 @@ int i;
                            p2.vida--;
                            timer=0;
                            forca=1;
-                        criaVento();
+                           criaVento();
                            //     ANIMAÇÃO DE TEXTURA
-                               TimerFunc_2(3);
+                               TimerFunc_2_constant = 3;
                                printf("damage\n");
-                               TimerFunc_1(6);
+                               TimerFunc_1_constant_projetil = 1;
                                puts("projetil");
                                p2.posicao[0]+=TRANSLADA;
                                A2.posicao.x+=TRANSLADA;
@@ -141,8 +136,10 @@ int i;
                            printf("\nACERTEI NO SEGUNDO\t\n %d",p2.vida);
                            if(ativo){
                                 ativo=0;
+                                ativa_projetil = 0;
                            }else{
                                 ativo=1;
+                                ativa_projetil = 0;
                            }
 
    			}
@@ -156,8 +153,8 @@ int i;
                            forca=1;
                            p1.vida--;
                            //    ANIMAÇÃO DE TEXTURA
-                               TimerFunc_1(3);
-                               TimerFunc_2(6);
+                               TimerFunc_1_constant = 3;
+                               TimerFunc_2_constant_projetil = 1;
                                p1.posicao[0]-=5*TRANSLADA;
                                A1.posicao.x-=5*TRANSLADA;
                                A1.posicao_inicial.x-=5*TRANSLADA;
@@ -165,8 +162,10 @@ int i;
                            //    FIM DA ANIMAÇÃO DE TEXTURA
                            if(ativo){
                                 ativo=0;
+                                ativa_projetil = 0;
                            }else{
                                 ativo=1;
+                                ativa_projetil = 0;
                            }
    			}
    		}
@@ -174,9 +173,9 @@ int i;
       cheat=0;
    	if(p1.vida == 0||p2.vida == 0){
       if (p1.vida == 0) {
-        TimerFunc_1(4);
+        TimerFunc_1_constant = 4;
       }else if(p2.vida == 0){
-        TimerFunc_2(4);
+        TimerFunc_1_constant = 4;
       }
    	}
 }
@@ -271,7 +270,8 @@ if(cheat){
                   		if(x > p2.posicao[0] && x < p2.posicao[0]+LARGURAPERSONAGEM){
                   			if(y < p2.posicao[1]+ALTURAPERSONAGEM)
                                           v=1;
-                  		}
+
+                      }
                   	}else{
                   		if(x > p1.posicao[0] && x < p1.posicao[0]+LARGURAPERSONAGEM){
                   			if(y < p1.posicao[1]+ALTURAPERSONAGEM)
