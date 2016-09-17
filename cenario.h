@@ -30,4 +30,5 @@ void desenha_Vento();
 void reiniciaJogo(void);
 void desenhaJanela();
 void geraCorJanela();
+void desenha_texture_vento();
 #endif // CENARIO_H

@@ -25,15 +25,17 @@ void inicializa(void)
     ativo = 1;
     abrir_audio();
     gerarMapa(mapa);
-    criaVento();
+    texture_set_menu = 0;
+    menu = 0;
     inicializa_personagem();
     inicializa_Projetil();
-    textura_vento(0);
+    vidas_func();
     iniciaAstro();
     glClearColor(0, 0, 0, 0);
     geraCorJanela();
-
+    carrega_textura_menu();
     inittexture();
+    criaVento();
     glutPostRedisplay();
 
 }
@@ -63,22 +65,22 @@ void redimensionada(int w, int h)
 }
 
 void desenhaCena(){
+
   planodeFundo();
   desenhaCenaInicialJogo(mapa);
+  desenhaVida(30,1120);
+  desenhaVida_2(600,1120);
   movimentoPersonagem(p1.posicao[0],p1.posicao[1],0);
   movimentoPersonagem(p2.posicao[0],p2.posicao[1],1);
   criaAstro();
-
-  desenha_Vento();
-  desenhaVida(30,1120);
-  desenhaVida_2(600,1120);
-  telaPause();
   if(ativa_projetil == 1)
     criaProjetil();
   geraTrajetoria();
   barraForca();
   desenhaJanela();
   geraAngulo();
+  desenha_Vento();
+  telaPause();
   glutSwapBuffers();
 }
 
@@ -106,13 +108,13 @@ int main(int argc, char **argv) {
       glutSpecialFunc(setasPressionadas);
       glutIdleFunc(Idle);
       glutTimerFunc(0,JogoRoda,0);
+      glutTimerFunc(0,textura_vento,0);
       glutTimerFunc(0,TimerFunc_1,0);
       glutTimerFunc(0,TimerFunc_2,0);
       glutTimerFunc(0,TimerFunc_1_Projetil,0);
       glutTimerFunc(0,TimerFunc_2_Projetil,0);
-      glutTimerFunc(0,util_texture_vida_p1,0);
-  //    glutTimerFunc(0,util_texture_vida_p2,0);
-      glutTimerFunc(0,util_texture_vento,0);
+      glutTimerFunc(0,desenha_texture_vento,0);
+      glutTimerFunc(0,vidas_func,0);
       atexit (SDL_Quit);
       glutMainLoop();
       return 0;

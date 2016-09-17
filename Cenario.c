@@ -10,6 +10,7 @@ ASTRO Sol;
 int varia=0;
 int forca;
 int vento;
+extern int vento_set;
 JANELA window [10000];
 
 PREDIOS mapa [NUMPREDIOS];
@@ -36,6 +37,8 @@ void criarRetangulo(double largura, double altura,unsigned int texture){
     glTexCoord2f(1.0, 0.0); glVertex3f(largura,0,0);
     glTexCoord2f(1.0, 1.0); glVertex3f(largura,altura,0);
     glTexCoord2f(0.0, 1.0); glVertex3f(0,altura,0);
+
+
   glEnd();
   glDisable(GL_TEXTURE_2D);
 }
@@ -99,7 +102,6 @@ void gerarMapa(PREDIOS* predio) {
 }
 
 void geraCorJanela(){
-
       int i,j,k,d,cont=0;
       for(i=0;i<NUMPREDIOS;i++)
       {
@@ -124,10 +126,9 @@ void geraCorJanela(){
 }
 
 void desenhaJanela(){
-
+if(pause){
       int i,j,k,numjanelas=0;
       float cont;
-if(pause){
       for(i=0;i<NUMPREDIOS;i++)
       {
             for(j=30;j<mapa[i].y-25;j+=30){
@@ -172,7 +173,6 @@ if(pause){
             }
       }
 }
-      glutPostRedisplay();
       glutTimerFunc(20,JogoRoda,0);
 
 }
@@ -180,7 +180,7 @@ if(pause){
 void telaPause(){
 
       if(pause==0){
-      carrega_textura_menu (0);
+
       criarRetangulo(LARGURA,ALTURA,menu_texture);
       }
 }
@@ -259,8 +259,44 @@ void criaVento(){
       }else{
       vento = f_vento;
       }
-      printf("vento === %d\n",vento );
+      desenha_texture_vento();
+}
+void desenha_texture_vento(){
 
+        if(vento == 0){
+          vento_set = 0;
+        }else if(vento == 1) {
+          if(ativo)
+            vento_set = 1;
+          else
+            vento_set = 4;
+        }else if(vento == 2) {
+          if(ativo)
+            vento_set = 2;
+          else
+            vento_set = 5;
+        }else if(vento >= 3 ){
+          if(ativo)
+            vento_set = 3;
+          else
+            vento_set = 6;
+        }else if (vento == -1) {
+          if(ativo)
+            vento_set = 4;
+          else
+            vento_set = 1;
+        }else if (vento == -2) {
+          if(ativo)
+            vento_set = 5;
+          else
+            vento_set = 2;
+        }else if (vento <= -3) {
+          if(ativo)
+            vento_set = 6;
+          else
+            vento_set = 3;
+        }
+        glutTimerFunc(80,desenha_texture_vento,1);
 }
 void desenha_Vento(){
 

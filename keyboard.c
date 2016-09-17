@@ -24,11 +24,7 @@ aux = key;
     case 27:
             if(menu != 0 && menu != 1 && menu != 2 && menu != 3 && menu!=4){
                 texture_set_menu = 6;
-                if(menu != 8 && menu != 7)
-                {
-                  menu = 6;
-
-                }
+                menu = 6;
                 pause = 0;
             }
             if(menu == 4)
@@ -102,7 +98,6 @@ aux = key;
                   exit(0);
                 }
              }else{
-               printf("ok\n");
                 if(forca){
                   forca=0;
                 }else{
@@ -128,9 +123,9 @@ aux = key;
      case 'r':
      case 'R':
              if(menu != 0 && menu != 1 && menu != 2 && menu != 3){
-                  if(menu == 7 || menu ==8){
+                  if(menu == 7 || menu == 8){
                     reiniciaJogo();
-                    pause = 0;
+                    pause = 1;
                   }else{
                     texture_set_menu = 9;
                     menu = 9;
@@ -179,9 +174,9 @@ if(timer==0){
                 p2.posicao[0]+=TRANSLADA;
                 A2.posicao.x+=TRANSLADA;
                 A2.posicao_inicial.x+=TRANSLADA;
-                TimerFunc_1_constant = 1;
+                TimerFunc_2_constant = 1;
                 mage_4_Walk();
-                TimerFunc_1_constant = 0;
+                TimerFunc_2_constant = 0;
             }
       }
       break;
@@ -200,9 +195,9 @@ if(timer==0){
                 p2.posicao[0]-=TRANSLADA;
                 A2.posicao.x-=TRANSLADA;
                 A2.posicao_inicial.x-=TRANSLADA;
-                TimerFunc_1_constant = 1;
+                TimerFunc_2_constant = 1;
                 mage_4_Walk();
-                TimerFunc_1_constant = 0;
+                TimerFunc_2_constant = 0;
             }
       }
       break;
@@ -252,8 +247,7 @@ if(timer==0){
 
       break;
      default:
-
-               glutPostRedisplay();
+           glutPostRedisplay();
         break;
   }
 }
