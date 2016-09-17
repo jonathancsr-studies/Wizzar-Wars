@@ -30,8 +30,8 @@ void inicializa(void)
     iniciaAstro();
     glClearColor(0, 0, 0, 0);
     inittexture();
+    geraCorJanela();
     glutPostRedisplay();
-
 }
 
 void redimensionada(int w, int h)
@@ -70,6 +70,7 @@ void desenhaCena(){
   geraTrajetoria();
   barraForca();
   desenha_Vento();
+  desenhaJanela();
   geraAngulo();
   glutSwapBuffers();
 }

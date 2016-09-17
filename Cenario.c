@@ -10,6 +10,8 @@ ASTRO Sol;
 int varia=0;
 int forca;
 int vento;
+JANELA window [10000];
+
 PREDIOS mapa [NUMPREDIOS];
 extern GLuint fundo,lua,vento_texture;
 
@@ -97,7 +99,57 @@ void gerarMapa(PREDIOS* predio) {
       }
 }
 
+void geraCorJanela(){
 
+      int i,j,k,d,cont=0;
+      for(i=0;i<NUMPREDIOS;i++)
+      {
+            for(j=30;j<mapa[i].y-25;j+=30){
+                  for(k=0;k<3;k++)
+                  {
+                        d=rand()%10;
+                        if(d<4){
+                        window[cont].R=0;
+                        window[cont].G=0;
+                        window[cont].B=0;
+                        }
+                        if (d>= 3) {
+                        window[cont].R=0.8;
+                        window[cont].G=0.6;
+                        window[cont].B=0.1;
+                        }
+                        cont++;
+                  }
+            }
+      }
+}
+
+void desenhaJanela(){
+
+      int i,j,k,numjanelas=0;
+      float cont;
+if(pause){
+      for(i=0;i<NUMPREDIOS;i++)
+      {
+            for(j=30;j<mapa[i].y-25;j+=30){
+              cont = (LARGURA/NUMPREDIOS/9);
+                  for(k=0;k<3;k++)
+                  {
+                        glColor3f(window[numjanelas].R,window[numjanelas].G,window[numjanelas].B);
+                        glBegin(GL_TRIANGLE_FAN);
+                          glVertex3f(mapa[i].cont+cont,j,0);
+                          glVertex3f(mapa[i].cont+cont+10,j,0);
+                          glVertex3f(mapa[i].cont+cont+10,j+20,0);
+                          glVertex3f(mapa[i].cont+cont,j+20,0);
+
+                        glEnd();
+                  cont+=(2*(LARGURA/NUMPREDIOS/7));
+                  numjanelas++;
+                  }
+            }
+      }
+}
+}
 
 void planodeFundo(){
   glClear(GL_COLOR_BUFFER_BIT);

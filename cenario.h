@@ -8,6 +8,12 @@ typedef struct astro{
 
 }ASTRO;
 
+typedef struct janela{
+
+      float R,G,B;
+
+}JANELA;
+
 void criarRetangulo(double largura, double altura,unsigned int texture);
 void desenhaCenaInicialJogo(PREDIOS predio[]);
 void gerarMapa(PREDIOS* predio) ;
@@ -22,4 +28,6 @@ void vento_func();
 void criaVento();
 void desenha_Vento();
 void reiniciaJogo(void);
+void desenhaJanela();
+void geraCorJanela();
 #endif // CENARIO_H
