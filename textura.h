@@ -3,7 +3,7 @@
 GLuint tex;
 GLuint mage_3,mage_3_projetil;
 GLuint mage_4, mage_4_projetil;
-GLuint menu_texture,menu_hover,fundo,lua,vento_texture;
+GLuint menu_texture,menu_hover,fundo,lua,vento_texture,vida_mage_3,vida_mage_4;
 
 int TimerFunc_1_constant_projetil,TimerFunc_1_constant;
 int TimerFunc_2_constant_projetil,TimerFunc_2_constant;
@@ -34,5 +34,9 @@ void mage_4_Damage();
 void mage_4_Die();
 void Mage_4_projetil_idle();
 void Mage_4_projetil_colision();
+
+void util_texture_vida_p1();
+void util_texture_vida_p2();
+void util_texture_vento();
 
 #endif

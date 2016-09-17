@@ -37,8 +37,7 @@ void criarRetangulo(double largura, double altura,unsigned int texture){
     glTexCoord2f(1.0, 1.0); glVertex3f(largura,altura,0);
     glTexCoord2f(0.0, 1.0); glVertex3f(0,altura,0);
   glEnd();
-  if(texture != 0)
-    glDisable(GL_TEXTURE_2D);
+  glDisable(GL_TEXTURE_2D);
 }
 
 void desenhaCenaInicialJogo(PREDIOS predio[]){
@@ -154,7 +153,7 @@ if(pause){
 void planodeFundo(){
   glClear(GL_COLOR_BUFFER_BIT);
       glColor3f(0,0,0.3);
-      criarRetangulo(LARGURA,ALTURA,fundo);
+      criarRetangulo(800,1300,fundo);
 }
 
 void JogoRoda(){
@@ -264,11 +263,10 @@ void criaVento(){
 
 }
 void desenha_Vento(){
-  /*textura_vento(vento);
+
   glPushMatrix();
-    glTranslatef(LARGURA/2-120,800,0);
+    glTranslatef(LARGURA/2-190,1120,0);
     glColor3f(1,1,1);
-    criarRetangulo(300,300,vento);
+    criarRetangulo(100,150,vento_texture);
   glPopMatrix();
-*/
 }

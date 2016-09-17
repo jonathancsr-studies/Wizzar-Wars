@@ -12,22 +12,28 @@ int i;
 extern int TimerFunc_1_constant,TimerFunc_2_constant;
 extern int ativa_projetil;
 extern int texture_set_menu;
+extern Mix_Music *somFundo,*somIntro ;
+extern Mix_Chunk *somSpell_0,*somSpell_1,*somSpell_2,*somSpell_3,*somSpell_4;
 
 void teclasPressionada(unsigned char key, int x, int y){
 unsigned char aux;
 aux = key;
   switch (key) {
+    case 'q':
+            break;
     case 27:
             if(menu != 0 && menu != 1 && menu != 2 && menu != 3 && menu!=4){
                 texture_set_menu = 6;
                 if(menu != 8 && menu != 7)
                 {
                   menu = 6;
+
                 }
                 pause = 0;
             }
             if(menu == 4)
             {
+
               menu=0;
               texture_set_menu = 0;
             }
@@ -44,13 +50,17 @@ aux = key;
               break;
      case 'p':
      case 'P':
+            if(menu == 0 || menu == 1 || menu == 2 || menu == 3 || menu == 4){
 
-             if(menu != 0 && menu != 1 && menu != 2 && menu != 3){
-                   pause=0;
-                   menu = 5;
-             }else if(menu == 5){
-                   pause=1;
-             }
+             }else{
+                if(pause){
+                  menu = 5;
+                  texture_set_menu = 5;
+                  pause = 0;
+                }else{
+                  pause = 1;
+                }
+            }
      break;
      case' ':
              if(forca==0)
@@ -59,6 +69,19 @@ aux = key;
                TimerFunc_1_constant = 2;
                lancaProjetil();
                timer=1;
+               int i;
+               i = rand()%5;
+               if(i == 0)
+                 Mix_PlayChannel( -1, somSpell_0, 0 );
+               else if(i == 1)
+                 Mix_PlayChannel(-1 , somSpell_1, 0);
+               else if(i == 2)
+                 Mix_PlayChannel(-1, somSpell_2, 0);
+               else if(i == 3)
+                 Mix_PlayChannel(-1, somSpell_3, 0);
+               else if(i == 4)
+                 Mix_PlayChannel(-1, somSpell_4, 0);
+
               }
                 break;
       case 70:
@@ -66,9 +89,12 @@ aux = key;
               break;
      case 13:if(menu==1 || menu ==2 || menu ==3){
                 if(menu == 1){
-                  menu = 5;
+                  reiniciaJogo();
+                  menu = 10;
                   pause = 1;
-                    barraForca();
+                  Mix_HaltMusic();
+                  Mix_PlayMusic(somFundo, -1);
+                  barraForca();
                 }else if(menu == 2){
                   menu = 4;
                   texture_set_menu = 4;
@@ -117,6 +143,8 @@ aux = key;
                 if(menu == 6){
                   menu = 0;
                   texture_set_menu = 0;
+                  Mix_HaltMusic();
+                  Mix_PlayMusic(somIntro, -1);
                 break;
               }else if(menu == 9)
               {
@@ -125,10 +153,7 @@ aux = key;
 
               }
 
-
      break;
-
-
      default:
      break;
   }

@@ -18,20 +18,24 @@ extern int ativa_projetil;
 extern int vento;
 extern int menu = 0;
 extern int texture_set_menu = 0;
-//extern Mix_Music *Intro;
+extern Mix_Music *somIntro;
 
 void inicializa(void)
 {
     ativo = 1;
+    abrir_audio();
     gerarMapa(mapa);
     criaVento();
     inicializa_personagem();
     inicializa_Projetil();
+    textura_vento(0);
     iniciaAstro();
     glClearColor(0, 0, 0, 0);
-    inittexture();
     geraCorJanela();
+
+    inittexture();
     glutPostRedisplay();
+
 }
 
 void redimensionada(int w, int h)
@@ -64,12 +68,15 @@ void desenhaCena(){
   movimentoPersonagem(p1.posicao[0],p1.posicao[1],0);
   movimentoPersonagem(p2.posicao[0],p2.posicao[1],1);
   criaAstro();
+
+  desenha_Vento();
+  desenhaVida(30,1120);
+  desenhaVida_2(600,1120);
   telaPause();
   if(ativa_projetil == 1)
     criaProjetil();
   geraTrajetoria();
   barraForca();
-  desenha_Vento();
   desenhaJanela();
   geraAngulo();
   glutSwapBuffers();
@@ -81,6 +88,8 @@ void Idle(){
 
 int main(int argc, char **argv) {
 
+      SDL_Init (SDL_INIT_AUDIO);
+
       glutInit(&argc, argv);
       glutInitContextVersion(1,1);
       glutInitContextProfile(GLUT_COMPATIBILITY_PROFILE);
@@ -88,23 +97,23 @@ int main(int argc, char **argv) {
       glutInitWindowSize(ALTURA,LARGURA);
       glutInitWindowPosition(0,0);
       glutCreateWindow("JOGO");
+      inicializa();
+      Mix_PlayMusic(somIntro, -1);
 
-//      SDL_Init (SDL_INIT_AUDIO);
-
-//      Mix_PlayMusic(Intro,-1);
       glutDisplayFunc(desenhaCena);
       glutReshapeFunc(redimensionada);
       glutKeyboardFunc(teclasPressionada);
       glutSpecialFunc(setasPressionadas);
       glutIdleFunc(Idle);
-//      glutMouseFunc(mouse);
       glutTimerFunc(0,JogoRoda,0);
       glutTimerFunc(0,TimerFunc_1,0);
       glutTimerFunc(0,TimerFunc_2,0);
       glutTimerFunc(0,TimerFunc_1_Projetil,0);
       glutTimerFunc(0,TimerFunc_2_Projetil,0);
-      inicializa();
-//      atexit (SDL_Quit);
+      glutTimerFunc(0,util_texture_vida_p1,0);
+  //    glutTimerFunc(0,util_texture_vida_p2,0);
+      glutTimerFunc(0,util_texture_vento,0);
+      atexit (SDL_Quit);
       glutMainLoop();
       return 0;
 }

@@ -1,6 +1,7 @@
 #include "include.h"
 PERSONAGEM p1,p2;
 extern PREDIOS mapa[NUMPREDIOS];
+extern GLuint vida_mage_3,vida_mage_4;
 
 void geradorDePersonagem(double largura, double altura,int k){
 
@@ -41,4 +42,26 @@ void inicializa_personagem(){
       p2.vida=3;
       p1.posicao[1]=mapa[0].y;
       p2.posicao[1]=mapa[NUMPREDIOS-1].y;
+}
+
+
+void desenhaVida(int x, int y){
+
+  glPushMatrix();
+    glTranslatef(x,y,0);
+    glColor3f(1,1,1);
+    glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, vida_mage_3);
+        geradorDePersonagem(100,150,0);
+  glPopMatrix();
+}
+void desenhaVida_2(int x, int y){
+
+  glPushMatrix();
+    glTranslatef(x,y,0);
+    glColor3f(1,1,1);
+    glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, vida_mage_4);
+        geradorDePersonagem(100,150,0);
+  glPopMatrix();
 }

@@ -1,7 +1,7 @@
 #include "include.h"
 extern int ativa_projetil;
 extern int vento,ativo;
-
+extern PERSONAGEM p1,p2;
 
 unsigned int loadTexture(char nometextura[]){
     glClearColor (1, 1, 1, 0);
@@ -384,7 +384,7 @@ void carrega_textura_menu(){
   }else if(texture_set_menu == 4){
       menu_texture = loadTexture("./menus/creditos.png");
   }else if (texture_set_menu == 5) {
-    menu_texture = loadTexture("./menus/menu_pause.png");
+    menu_texture = loadTexture("./menus/menu_Pause.png");
   }else if(texture_set_menu == 6){
     menu_texture = loadTexture("./menus/menu_sair.png");
   }else if(texture_set_menu == 7){
@@ -392,53 +392,81 @@ void carrega_textura_menu(){
   }else if(texture_set_menu == 8){
     menu_texture = loadTexture("./menus/ganhou_2.png");
   }else if(texture_set_menu == 9){
-    menu_texture = loadTexture("./menus/ganhou_2.png");
+    menu_texture = loadTexture("./menus/menu_reiniciar.png");
   }
 
 }
 
 void textura_vento(int vento){
 
-  if(ativo){
+}
+
+void util_texture_vida_p1(){
+    if(p1.vida == 3 )
+      vida_mage_3 = loadTexture("./vidas/jogador_1_vida_3.png");
+    else if(p1.vida == 2 )
+      vida_mage_3 = loadTexture("./vidas/jgador_1_vida_2.png");
+    else if(p1.vida == 1 )
+      vida_mage_3 = loadTexture("./vidas/jogador_1_vida_1.png");
+    else if(p1.vida == 0 )
+      vida_mage_3 = loadTexture("./vidas/jogador_1_vida_0.png");
+
+      glutTimerFunc(80,util_texture_vida_p1,1);
+}
+void  util_texture_vida_p2() {
+
+        if(p2.vida == 3 )
+            vida_mage_4 = loadTexture("./vidas/jogador_1_vida_3.png");
+          else if(p2.vida == 2 )
+            vida_mage_4 = loadTexture("./vidas/jgador_1_vida_2.png");
+          else if(p2.vida == 1 )
+            vida_mage_4 = loadTexture("./vidas/jogador_1_vida_1.png");
+          else if(p2.vida == 0 )
+            vida_mage_4 = loadTexture("./vidas/jogador_1_vida_0.png");
+
+}
+
+void util_texture_vento() {
+if(ativo){
       if(vento == 0)
       {
-        vento_texture = loadTexture("./util/vento_sem.png");
+        vento_texture = loadTexture("v_07.png");
       }else if(vento == 1)
       {
-        vento_texture = loadTexture("./util/vento_direita_1");
+        vento_texture = loadTexture("v_01.png");
       }else if(vento == 2)
       {
-        vento_texture = loadTexture("./util/vento_direita_2");
+        vento_texture = loadTexture("v_02.png");
       }else if(vento >= 3 )
       {
-        vento_texture = loadTexture("./util/vento_direita_3");
+        vento_texture = loadTexture("v_03.png");
       }else if (vento == -1) {
-        vento_texture = loadTexture("./util/vento_esquerda_1");
+        vento_texture = loadTexture("v_04.png");
       }else if (vento == -2) {
-        vento_texture = loadTexture("./util/vento_esquerda_2");
+        vento_texture = loadTexture("v_05.png");
       }else if (vento <= -3) {
-        vento_texture = loadTexture("./util/vento_esquerda_3");
+        vento_texture = loadTexture("v_06.png");
       }
-  }else{
-      if(vento == 0)
-      {
-        vento_texture = loadTexture("./util/vento_sem_01.png");
-      }else if(vento == -1)
-      {
-        vento_texture = loadTexture("./util/vento_direita_1");
-      }else if(vento == -2)
-      {
-        vento_texture = loadTexture("./util/vento_direita_2");
-      }else if(vento >= -3 )
-      {
-        vento_texture = loadTexture("./util/vento_direita_3");
-      }else if (vento == 1) {
-        vento_texture = loadTexture("./util/vento_esquerda_1");
-      }else if (vento == 2) {
-        vento_texture = loadTexture("./util/vento_esquerda_2");
-      }else if (vento <= 3) {
-        vento_texture = loadTexture("./util/vento_esquerda_3");
-      }
-  }
-
+}else{
+  if(vento == 0)
+  {
+    vento_texture = loadTexture("v_07.png");
+  }else if(vento == -1)
+  {
+    vento_texture = loadTexture("v_01.png");
+  }else if(vento == -2)
+  {
+    vento_texture = loadTexture("v_02.png");
+  }else if(vento >= -3 )
+  {
+    vento_texture = loadTexture("v_03.png");
+  }else if (vento == 1) {
+    vento_texture = loadTexture("v_04.png");
+  }else if (vento == 2) {
+    vento_texture = loadTexture("v_05.png");
+  }else if (vento <= 3) {
+    vento_texture = loadTexture("v_06.png");
+}
+}
+  glutTimerFunc(80,util_texture_vento,1);
 }
